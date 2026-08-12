@@ -1,0 +1,119 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/eridu-*-api-openapi.yml (derived from https://eridu.ai/wp-json/) plus live request/response
+  headers observed against https://eridu.ai/wp-json on 2026-08-12.
+note: Eridu publishes no developer documentation, so none of this is stated by the provider — it is the
+  WordPress core REST API contract as it is actually deployed on eridu.ai, read off the live route index
+  and live responses. Where a convention is absent, that absence is recorded rather than substituted with
+  the WordPress default.
+authentication:
+  anonymous_read: true
+  style: HTTP Basic (WordPress application passwords)
+  advertised_at: https://eridu.ai/wp-json/
+  note: Required only for write methods and for context=edit. Every operation catalogued in openapi/ is
+    anonymously readable. See authentication/eridu-authentication.yml.
+idempotency:
+  supported: false
+  header: null
+  note: No idempotency contract of any kind. The WordPress REST API defines no Idempotency-Key header,
+    no request-dedup window and no replay semantics; nothing on eridu.ai adds one. NO `Idempotency` pointer
+    is emitted in apis.yml — the 9-point agent-readiness signal is genuinely absent here, and claiming
+    it would be false.
+pagination:
+  style: page-number
+  request_params:
+  - name: page
+    default: 1
+    note: 1-based page index.
+  - name: per_page
+    default: 10
+    max: 100
+    note: Enforced server-side; per_page=500 returns 400 rest_invalid_param.
+  - name: offset
+    note: Absolute offset; overrides page when supplied.
+  response_headers:
+  - name: X-WP-Total
+    description: Total matching records across all pages.
+  - name: X-WP-TotalPages
+    description: Total pages at the current per_page.
+  - name: Link
+    description: RFC 8288 rel="next" / rel="prev" page links.
+  cors_exposed: true
+  cors_note: 'Access-Control-Expose-Headers: X-WP-Total, X-WP-TotalPages, Link — so browser clients can
+    read them.'
+  known_defect: On /wp/v2/media, X-WP-Total (115) does not agree with what an anonymous caller can retrieve
+    (21 items maximum). WordPress computes the total before applying the per-attachment read filter. Page
+    until the response body is shorter than per_page — do NOT drive the loop from X-WP-Total. Verified
+    2026-08-12; worked example in examples/eridu-examples.yml.
+field_selection:
+  sparse_fields:
+    param: _fields
+    description: Comma-separated list of top-level fields to return, e.g. _fields=id,slug,link,title.
+  embedding:
+    param: _embed
+    description: Inlines linked resources (author, featured media, terms) into `_embedded` in one round
+      trip, resolving the `_links` graph without follow-up requests.
+  context:
+    param: context
+    values:
+    - view
+    - embed
+    default: view
+    note: context=edit is anonymously rejected with 401 rest_forbidden_context.
+filtering_and_sorting:
+  search: search=<terms> free-text filter on collections; /wp/v2/search is the cross-type variant.
+  ordering: orderby + order=asc|desc; the allowed orderby enum is declared per collection in the OpenAPI.
+  id_filters:
+  - include
+  - exclude
+  - slug
+  - parent
+  - author
+  - categories
+  - tags
+  date_filters:
+  - after
+  - before
+  - modified_after
+  - modified_before
+hypermedia:
+  links_field: _links
+  description: Every record carries an HAL-style `_links` object (self, collection, about, author, replies,
+    wp:attachment, wp:term, curies). This is the only relationship documentation the surface has.
+  discovery_header: 'Link: <https://eridu.ai/wp-json/>; rel="https://api.w.org/" on every response.'
+request_tracing:
+  request_id_header: null
+  note: No provider request id. Responses carry only edge identifiers — `cf-ray` (Cloudflare) and `x-kinsta-cache`
+    / `ki-edge` (Kinsta hosting). Quote cf-ray when reporting an issue; there is no first-party correlation
+    id.
+versioning:
+  scheme: uri-namespace
+  current: wp/v2
+  namespaces:
+  - wp/v2
+  - oembed/1.0
+  - wp-site-health/v1
+  - wp-block-editor/v1
+  - wp-abilities/v1
+  - contact-form-7/v1
+  - redirection/v1
+  note: Version lives in the namespace segment, not a header. The namespace set is a function of the site's
+    installed plugins and can change without notice — see lifecycle/eridu-lifecycle.yml.
+error_envelope:
+  format: wp-rest-error
+  shape: '{code, message, data:{status, params?, details?}}'
+  rfc9457: false
+  see: errors/eridu-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  note: No RateLimit-*, X-RateLimit-* or Retry-After header observed on any 200 response. See rate-limits/eridu-rate-limits.yml.
+caching:
+  headers_observed:
+  - cf-cache-status
+  - x-kinsta-cache
+  - ki-cache-type
+  etag: false
+  note: 'Observed responses were cf-cache-status: DYNAMIC / x-kinsta-cache: MISS with no ETag or Last-Modified.'
+indexing:
+  robots: 'x-robots-tag: noindex is returned on every /wp-json/ response — the API surface is deliberately
+    excluded from search indexes.'

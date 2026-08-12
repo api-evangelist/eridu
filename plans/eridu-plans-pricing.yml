@@ -1,0 +1,25 @@
+generated: '2026-08-12'
+method: searched
+source: https://eridu.ai/
+plan_count: 0
+note: >-
+  Eridu publishes no pricing of any kind — not for an API and not for its products. The company
+  emerged from stealth in March 2026 and is pre-product: the site is Company, Leadership, Careers,
+  Contact and Resources, with no pricing page, no plans page, no signup, no "contact sales" pricing
+  gate and no store. The machine-readable surface catalogued in this repo is the corporate site's
+  WordPress REST API, which is free and anonymous with no commercial terms attached beyond the site
+  Terms of Use. This is a real zero, not an unread page.
+plans: []
+access:
+  model: free-anonymous
+  signup_required: false
+  api_key_required: false
+  terms: https://eridu.ai/terms-of-use/
+  sales_terms: https://eridu.ai/salestermsconditions/
+evidence:
+- url: https://eridu.ai/
+  status: 200
+  note: No pricing or plans link in the primary navigation (Company, Resources, Careers, Contact).
+- url: https://eridu.ai/wp-json/wp/v2/pages?per_page=20
+  status: 200
+  note: All 13 published pages enumerated; none is a pricing or plans page.

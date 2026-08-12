@@ -1,0 +1,124 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/eridu-*-api-openapi.yml plus the live `_links` graph and registered types/taxonomies read
+  from https://eridu.ai/wp-json/wp/v2/types and .../taxonomies on 2026-08-12.
+note: >-
+  eridu.ai registers no custom post types and no custom taxonomies — the entity graph is stock
+  WordPress core. That is itself the finding: unlike providers that model a product domain in their
+  CMS, Eridu's machine-readable surface carries no company-specific entity.
+entities:
+- name: post
+  rest_base: posts
+  api: openapi/eridu-content-api-openapi.yml
+  count_observed: 1
+  id: integer
+  key_fields: [id, date, modified, slug, status, link, title.rendered, content.rendered, excerpt.rendered, author, featured_media, categories, tags]
+  description: A news or press item published under eridu.ai/blog/ and surfaced on /resources/.
+- name: page
+  rest_base: pages
+  api: openapi/eridu-pages-api-openapi.yml
+  count_observed: 13
+  id: integer
+  key_fields: [id, slug, status, link, title.rendered, content.rendered, parent, menu_order, template]
+  description: A static marketing or policy page (Company, Leadership, Careers, Contact, Resources, Terms, Privacy).
+- name: attachment
+  rest_base: media
+  api: openapi/eridu-media-api-openapi.yml
+  count_observed: 115
+  id: integer
+  key_fields: [id, slug, source_url, mime_type, media_type, alt_text, media_details.sizes, post]
+  description: A media library item — leadership portraits, careers photography, investor logos, press imagery.
+- name: category
+  rest_base: categories
+  api: openapi/eridu-taxonomy-api-openapi.yml
+  count_observed: 1
+  taxonomy: category
+  key_fields: [id, count, name, slug, parent]
+- name: tag
+  rest_base: tags
+  api: openapi/eridu-taxonomy-api-openapi.yml
+  count_observed: 1
+  taxonomy: post_tag
+  key_fields: [id, count, name, slug]
+- name: user
+  rest_base: users
+  api: openapi/eridu-discovery-api-openapi.yml
+  count_observed: 2
+  key_fields: [id, name, slug, description, link, avatar_urls]
+  description: >-
+    Public author record. Only names and slugs are exposed anonymously; email and roles require
+    authentication.
+- name: type
+  rest_base: types
+  api: openapi/eridu-discovery-api-openapi.yml
+  count_observed: 11
+  key_fields: [slug, name, rest_base, rest_namespace, taxonomies, supports]
+  description: Registered content-type descriptor — the self-describing metadata layer.
+- name: taxonomy
+  rest_base: taxonomies
+  api: openapi/eridu-discovery-api-openapi.yml
+  count_observed: 4
+  key_fields: [slug, name, rest_base, types, hierarchical]
+- name: search_result
+  rest_base: search
+  api: openapi/eridu-search-api-openapi.yml
+  count_observed: 14
+  key_fields: [id, title, url, type, subtype]
+  description: Lightweight cross-type projection; dereference via `_links.self` to the full record.
+relationships:
+- from: post
+  to: user
+  kind: belongs_to
+  via: author
+  link: _links.author
+- from: post
+  to: attachment
+  kind: has_one
+  via: featured_media
+  link: _links.wp:featuredmedia
+- from: post
+  to: category
+  kind: has_many
+  via: categories
+  link: _links.wp:term[taxonomy=category]
+- from: post
+  to: tag
+  kind: has_many
+  via: tags
+  link: _links.wp:term[taxonomy=post_tag]
+- from: post
+  to: attachment
+  kind: has_many
+  via: null
+  link: _links.wp:attachment
+- from: page
+  to: page
+  kind: belongs_to
+  via: parent
+  link: _links.up
+- from: page
+  to: user
+  kind: belongs_to
+  via: author
+  link: _links.author
+- from: attachment
+  to: post
+  kind: belongs_to
+  via: post
+  link: _links.about
+- from: category
+  to: category
+  kind: belongs_to
+  via: parent
+- from: search_result
+  to: post
+  kind: has_one
+  via: id
+  note: type=post|page, subtype names the concrete entity; resolve via _links.self.
+id_conventions:
+  scheme: unprefixed auto-increment integers
+  note: >-
+    No prefixed identifiers (no `pst_`/`cus_` style). Ids are WordPress post ids and are only
+    meaningful within eridu.ai. They are not stable across a site migration.
+render: null

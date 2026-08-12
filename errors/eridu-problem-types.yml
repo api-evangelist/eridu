@@ -1,0 +1,73 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  Live error responses observed against https://eridu.ai/wp-json on 2026-08-12, cross-checked against
+  the 4xx responses declared in openapi/eridu-*-api-openapi.yml.
+format: wp-rest-error
+format_note: >-
+  Eridu's surface does NOT use RFC 9457 problem+json. Every error is returned as
+  `application/json` carrying the WordPress REST envelope `{code, message, data:{status, ...}}`.
+  There is no `type` URI, no `title`/`detail` split, and no problem registry. The `code` field is the
+  stable machine-readable identifier; `data.status` restates the HTTP status. Validation failures add
+  `data.params` (per-parameter message) and `data.details` (per-parameter nested error).
+envelope:
+  content_type: application/json
+  fields:
+  - name: code
+    type: string
+    description: Stable machine-readable error slug, e.g. rest_post_invalid_id.
+  - name: message
+    type: string
+    description: Human-readable message. Localized to the site language; do not match on it.
+  - name: data.status
+    type: integer
+    description: The HTTP status code, restated in the body.
+  - name: data.params
+    type: object
+    description: Present on rest_invalid_param — maps each failing parameter to a message.
+  - name: data.details
+    type: object
+    description: Present on rest_invalid_param — per-parameter nested {code, message, data}.
+problems:
+- status: 404
+  code: rest_post_invalid_id
+  title: Invalid post ID
+  observed: 'GET /wp/v2/posts/999999 -> {"code":"rest_post_invalid_id","message":"Invalid post ID.","data":{"status":404}}'
+  remediation: >-
+    The id does not exist or is not published. List the collection first (GET /wp/v2/posts) and use an
+    id from the response; do not construct ids.
+  source_operation: openapi/eridu-content-api-openapi.yml#getPost
+- status: 404
+  code: rest_no_route
+  title: No route was found matching the URL and request method
+  observed: 'GET /wp/v2/nope -> {"code":"rest_no_route","message":"No route was found matching the URL and request method.","data":{"status":404}}'
+  remediation: >-
+    The path or HTTP method is not registered. Read the live route index at GET /wp-json/ and use a
+    route it lists — the index is authoritative and the routes change with the site's plugin set.
+  source_operation: openapi/eridu-discovery-api-openapi.yml#getApiIndex
+- status: 400
+  code: rest_invalid_param
+  title: Invalid parameter
+  observed: 'GET /wp/v2/posts?per_page=500 -> data.params.per_page "per_page must be between 1 (inclusive) and 100 (inclusive)"'
+  remediation: >-
+    Read data.params and data.details to find the failing parameter and its bound. per_page is capped
+    at 100; page is 1-based; orderby and status accept only the enums declared in the OpenAPI.
+  source_operation: openapi/eridu-content-api-openapi.yml#listPosts
+- status: 401
+  code: rest_forbidden_context
+  title: Requested context is not permitted for an anonymous caller
+  observed: 'GET /wp/v2/posts?context=edit -> {"code":"rest_forbidden_context","message":"Sorry, you are not allowed to edit posts in this post type.","data":{"status":401}}'
+  remediation: >-
+    context=edit and context=embed-with-edit-fields require an authenticated WordPress user with an
+    application password. Use context=view (the default) for anonymous reads.
+  source_operation: openapi/eridu-content-api-openapi.yml#listPosts
+- status: 401
+  code: rest_cannot_view
+  title: Authentication required for the requested collection
+  observed: >-
+    GET /wp-abilities/v1/abilities -> 401. The WordPress Abilities API namespace is registered on the
+    site but is entirely auth-gated; no anonymous caller can enumerate or run an ability.
+  remediation: >-
+    Not reachable without a WordPress application password. Recorded here because it is the only
+    agent-facing namespace on the surface and its gating is a real, measured fact.
+  source_operation: null

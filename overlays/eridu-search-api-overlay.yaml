@@ -1,0 +1,38 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Eridu Search API
+  version: 1.0.0
+extends: openapi/eridu-search-api-openapi.yml
+x-generated: '2026-08-12'
+x-method: generated
+x-source: API Evangelist enrichment pass. Records what this pipeline added on top of the provider surface;
+  Eridu publishes no OpenAPI, so the extended document is itself an API Evangelist derivation of https://eridu.ai/wp-json/.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: eridu
+    x-apievangelist-provider-name: Eridu
+    x-apievangelist-surface: wordpress-rest
+    x-apievangelist-provider-published-spec: false
+    x-apievangelist-conventions: conventions/eridu-conventions.yml
+    x-apievangelist-errors: errors/eridu-problem-types.yml
+    x-apievangelist-authentication: authentication/eridu-authentication.yml
+    x-apievangelist-rate-limits: rate-limits/eridu-rate-limits.yml
+    x-apievangelist-lifecycle: lifecycle/eridu-lifecycle.yml
+- target: $.info
+  update:
+    x-apievangelist-access:
+      public: true
+      anonymous_read: true
+      signup_required: false
+      api_key_required: false
+      rate_limits_published: false
+- target: $.servers[0]
+  update:
+    x-apievangelist-verified: '2026-08-12'
+    x-apievangelist-verified-status: 200
+- target: $.paths['/wp/v2/search'].get
+  update:
+    x-agentic-access-ref: agentic-access/eridu-agentic-access.yml#search
+    x-apievangelist-idempotent: true
+    x-apievangelist-side-effects: none

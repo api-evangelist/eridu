@@ -1,0 +1,337 @@
+generated: '2026-08-12'
+method: probed
+source: Live unauthenticated GET requests against https://eridu.ai/wp-json on 2026-08-12.
+note: Every request and response below was executed against the live surface and captured verbatim (bodies
+  truncated where noted). Eridu publishes no examples of any kind — no docs, no cookbook, no Postman collection
+  — so these are the only worked examples that exist for this API.
+base_url: https://eridu.ai/wp-json
+auth: none — every example below is anonymous
+examples:
+- operationId: listPosts
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/posts?per_page=1&_fields=id,date,slug,link,title,categories,tags,author,featured_media
+  response:
+    status: 200
+    content_type: application/json
+    body:
+    - id: 2444
+      date: '2026-01-14T12:14:15'
+      slug: the-surge-of-ai-data-centers-powering-the-intelligence-revolution
+      link: https://eridu.ai/blog/the-surge-of-ai-data-centers-powering-the-intelligence-revolution/
+      title:
+        rendered: 'The Surge of AI Data Centers: Powering the Intelligence Revolution'
+      author: 6
+      featured_media: 2447
+      categories:
+      - 1
+      tags:
+      - 14
+- operationId: getPost
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/posts/2444?_fields=id,date,slug,link,title,excerpt,author,categories,tags
+  response:
+    status: 200
+    content_type: application/json
+    body:
+      id: 2444
+      date: '2026-01-14T12:14:15'
+      slug: the-surge-of-ai-data-centers-powering-the-intelligence-revolution
+      link: https://eridu.ai/blog/the-surge-of-ai-data-centers-powering-the-intelligence-revolution/
+      title:
+        rendered: 'The Surge of AI Data Centers: Powering the Intelligence Revolution'
+      excerpt:
+        rendered: '<p>The artificial intelligence boom isn&#8217;t just transforming software—it&#8217;s
+          reshaping the physical infrastructure of computing itself. Across the globe, AI data centers
+          are sprouting up at an unprecedented pace, driven by the insatiable computational demands of
+          modern AI systems. Unlike traditional data centers that primarily handle storage and web services,
+          AI data centers are purpose-built for [&hellip;]</p>
+
+          '
+        protected: false
+      author: 6
+      categories:
+      - 1
+      tags:
+      - 14
+- operationId: listPages
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/pages?per_page=3&orderby=title&order=asc&_fields=id,slug,link,title
+  response:
+    status: 200
+    content_type: application/json
+    body:
+    - id: 2453
+      slug: blog
+      link: https://eridu.ai/resources/blog/
+      title:
+        rendered: Blog
+    - id: 2481
+      slug: careers
+      link: https://eridu.ai/careers/
+      title:
+        rendered: Careers
+    - id: 2476
+      slug: company
+      link: https://eridu.ai/company/
+      title:
+        rendered: Company
+- operationId: listMedia
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/media?per_page=100&_fields=id,slug,source_url,mime_type,media_type
+  response:
+    status: 200
+    content_type: application/json
+    body:
+    - id: 2749
+      slug: behind-the-eridu-name
+      media_type: image
+      mime_type: image/png
+      source_url: https://eridu.ai/wp-content/uploads/2026/07/behind-the-eridu-name.png
+    - id: 2729
+      slug: ouglu_xdggg
+      media_type: image
+      mime_type: image/jpeg
+      source_url: https://eridu.ai/wp-content/uploads/2026/05/ouGlu_Xdggg.jpg
+  note: Truncated to the first 2 of 21 anonymously visible items. See anomalies below.
+- operationId: listCategories
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/categories?_fields=id,count,name,slug
+  response:
+    status: 200
+    content_type: application/json
+    body:
+    - id: 1
+      count: 1
+      name: Blog
+      slug: blog
+- operationId: listTags
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/tags?_fields=id,count,name,slug
+  response:
+    status: 200
+    content_type: application/json
+    body:
+    - id: 14
+      count: 1
+      name: The Infrastructure Behind AI
+      slug: ai-infrastructure
+- operationId: search
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/search?search=networking&per_page=5
+  response:
+    status: 200
+    content_type: application/json
+    body:
+    - id: 2756
+      title: Sales Terms &#038; Conditions
+      url: https://eridu.ai/salestermsconditions/
+      type: post
+      subtype: page
+      _links:
+        self:
+        - embeddable: true
+          href: https://eridu.ai/wp-json/wp/v2/pages/2756
+          targetHints:
+            allow:
+            - GET
+        about:
+        - href: https://eridu.ai/wp-json/wp/v2/types/page
+        collection:
+        - href: https://eridu.ai/wp-json/wp/v2/search
+    - id: 2476
+      title: Company
+      url: https://eridu.ai/company/
+      type: post
+      subtype: page
+      _links:
+        self:
+        - embeddable: true
+          href: https://eridu.ai/wp-json/wp/v2/pages/2476
+          targetHints:
+            allow:
+            - GET
+        about:
+        - href: https://eridu.ai/wp-json/wp/v2/types/page
+        collection:
+        - href: https://eridu.ai/wp-json/wp/v2/search
+    - id: 509
+      title: Home
+      url: https://eridu.ai/
+      type: post
+      subtype: page
+      _links:
+        self:
+        - embeddable: true
+          href: https://eridu.ai/wp-json/wp/v2/pages/509
+          targetHints:
+            allow:
+            - GET
+        about:
+        - href: https://eridu.ai/wp-json/wp/v2/types/page
+        collection:
+        - href: https://eridu.ai/wp-json/wp/v2/search
+- operationId: listTypes
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/types
+  response:
+    status: 200
+    content_type: application/json
+    body:
+      post:
+        name: Posts
+        slug: post
+        taxonomies:
+        - category
+        - post_tag
+        rest_base: posts
+        rest_namespace: wp/v2
+      page:
+        name: Pages
+        slug: page
+        taxonomies: []
+        rest_base: pages
+        rest_namespace: wp/v2
+      attachment:
+        name: Media
+        slug: attachment
+        taxonomies: []
+        rest_base: media
+        rest_namespace: wp/v2
+      nav_menu_item:
+        name: Navigation Menu Items
+        slug: nav_menu_item
+        taxonomies:
+        - nav_menu
+        rest_base: menu-items
+        rest_namespace: wp/v2
+- operationId: listUsers
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/users?_fields=id,name,slug,link
+  response:
+    status: 200
+    content_type: application/json
+    body:
+    - id: 4
+      name: dev_nrg
+      link: https://eridu.ai/author/dev_nrg/
+      slug: dev_nrg
+    - id: 6
+      name: Eridu AI
+      link: https://eridu.ai/author/admin_eridu/
+      slug: admin_eridu
+- operationId: getOembed
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/oembed/1.0/embed?url=https%3A%2F%2Feridu.ai%2Fblog%2Fthe-surge-of-ai-data-centers-powering-the-intelligence-revolution%2F
+  response:
+    status: 200
+    content_type: application/json
+    body:
+      version: '1.0'
+      provider_name: Eridu - Faster AI
+      provider_url: https://eridu.ai
+      author_name: Eridu AI
+      author_url: https://eridu.ai/author/admin_eridu/
+      title: 'The Surge of AI Data Centers: Powering the Intelligence Revolution'
+      type: rich
+      width: 600
+      height: 338
+      html: '<blockquote class="wp-embedded-content" data-secret="IaOw91b8B2"><a href="https://eridu.ai/blog/the-surge-of-ai-data-centers-powering-the-intelligence-revolution/">The
+        Surge of AI Data Centers: Powering the Intelligence Revolution</a></blockquote><iframe sandbox="allow-scripts"
+        security="restricted" src="https://eridu.ai/blog/the-surge-of-ai-data-centers-powering-the-intelligence-revolution/embed/#?secret=IaOw91b8B2"
+        width="600" height="338" title="&#8220;The Surge of AI Data Centers: Powering the Intelligence
+        Revolution&#8221; &#8212; Eridu - Faster AI" data-secret="IaOw91b8B2" frameborder="0" marginwidth="0"
+        marginheight="0" scrolling="no" class="wp-embedded-content"></iframe><script>
+
+        /*! This file is auto-generated */
+
+        !function(d,l){"use strict";l.querySelector&&d.addEventListener&&"undefined"!=typeof URL&&(d.wp=d.wp||{},d.wp.receiveEmbedMessage||(d.wp.receiveEmbedMessage=function(e){var
+        t=e.data;if((t||t.secret||t.message||t.value)&&!/[^a-zA-Z0-9]/.test(t.secret)){for(var s,r,n,a=l.querySelectorAll(''iframe[data-secret="''+t.secret+''"]''),o=l.querySelectorAll(''blockquote[data-secret="''+t.secret+''"]''),c=new
+        RegExp("^https?:$","i"),i=0;i<o.length;i++)o[i].style.display="none";for(i=0;i<a.length;i++)s=a[i],e.source===s.contentWindow&&(s.removeAttribute("style"),"height"===t.message?(1e3<(r=parseInt(t.value,10))?r=1e3:~~r<200&&(r=200),s.height=r):"link"===t.message&&(r=new
+        URL(s.getAttribute("src")),n=new URL(t.value),c.test(n.protocol))&&n.host===r.host&&l.activeElement===s&&(d.top.location.href=t.value))}},d.addEventListener("message",d.wp.receiveEmbedMessage,!1),l.addEventListener("DOMContentLoaded",function(){for(var
+        e,t,s=l.querySelectorAll("iframe.wp-embedded-content"),r=0;r<s.length;r++)(t=(e=s[r]).getAttribute("data-secret"))||(t=Math.random().toString(36).substring(2,12),e.src+="#?secret="+t,e.setAttribute("data-secret",t)),e.contentWindow.postMessage({message:"ready",secret:t},"*")},!1)))}(window,document);
+
+        //# sourceURL=https://eridu.ai/wp-includes/js/wp-embed.min.js
+
+        </script>
+
+        '
+      thumbnail_url: https://eridu.ai/wp-content/uploads/2026/01/example-image-768x366.jpg
+      thumbnail_width: 600
+      thumbnail_height: 286
+error_examples:
+- name: unknown post id
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/posts/999999
+  response:
+    status: 404
+    body:
+      code: rest_post_invalid_id
+      message: Invalid post ID.
+      data:
+        status: 404
+- name: unregistered route
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/nope
+  response:
+    status: 404
+    body:
+      code: rest_no_route
+      message: No route was found matching the URL and request method.
+      data:
+        status: 404
+- name: per_page above the cap
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/posts?per_page=500
+  response:
+    status: 400
+    body:
+      code: rest_invalid_param
+      message: 'Invalid parameter(s): per_page'
+      data:
+        status: 400
+        params:
+          per_page: per_page must be between 1 (inclusive) and 100 (inclusive)
+- name: edit context without credentials
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp/v2/posts?context=edit
+  response:
+    status: 401
+    body:
+      code: rest_forbidden_context
+      message: Sorry, you are not allowed to edit posts in this post type.
+      data:
+        status: 401
+- name: abilities namespace is auth-gated
+  request:
+    method: GET
+    url: https://eridu.ai/wp-json/wp-abilities/v1/abilities
+  response:
+    status: 401
+    body: null
+  note: Registered namespace; anonymous callers cannot enumerate abilities.
+anomalies:
+- surface: /wp/v2/media
+  observed: 'X-WP-Total reports 115 attachments, but an anonymous caller never receives more than 21 items
+    no matter how it pages: per_page=10 returns 2 items, per_page=50 returns 12, per_page=100 returns
+    21, each with X-WP-Total: 115. Requesting page=2 at per_page=2 returns an empty array.'
+  cause: WordPress computes X-WP-Total before applying the per-attachment read filter, then removes attachments
+    whose parent post is not publicly readable. The header therefore describes the library, while the
+    body describes what the caller may see.
+  impact: 'Agent-hostile: a client that trusts X-WP-Total to drive its paging loop will request pages
+    that are permanently empty and conclude the API is failing. Page until the body is short, not until
+    the header total is reached.'
+  verified: '2026-08-12'

@@ -42,5 +42,65 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Eridu is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/eridu_stock/
+Eridu is an AI networking infrastructure company founded in 2024 and headquartered in Saratoga,
+California. It is building a clean-sheet network switch architecture — silicon, systems and software
+together — aimed at the interconnect bottleneck that limits how efficiently GPUs exchange data inside
+large AI training clusters. Co-founded by CEO Drew Perkins (previously Lightera Networks, acquired by
+Ciena, and Infinera) with Chief Product Officer Omar Hassen, it emerged from stealth in March 2026
+with an oversubscribed Series A of more than $200M led by Socratic Partners, bringing total funding to
+approximately $230M.
+
+- Website: https://eridu.ai/
+- Company: https://eridu.ai/company/ · Leadership: https://eridu.ai/company/leadership/
+- Resources: https://eridu.ai/resources/ · Careers: https://ats.rippling.com/eridu-ai/jobs
+
+## What this profile found
+
+Eridu is a semiconductor and systems company, not a software vendor. **It publishes no developer
+program** — no developer portal, no API reference, no product API, no SDKs, no pricing, no GitHub
+organization, no MCP server, no A2A agent card, no webhooks and no `/.well-known/` documents. Every
+one of those is a measured absence recorded in the artifacts below, not an unchecked gap.
+
+The one machine-readable interface Eridu serves is the **WordPress core REST API** behind its
+corporate site at `https://eridu.ai/wp-json` — anonymous, effectively read-only, and carrying company
+content rather than product data. It is catalogued here for discovery. The seven OpenAPI documents in
+`openapi/` are API Evangelist derivations of the provider's own live self-describing route index
+(saved verbatim to `openapi/_original/eridu-wp-json-index.json`); Eridu publishes no OpenAPI.
+
+Two findings worth surfacing:
+
+- **`/wp/v2/media` reports a total it will not serve.** `X-WP-Total` says 115 attachments; an
+  anonymous caller receives at most 21, however it pages. WordPress computes the total before
+  applying the per-attachment read filter. A client that drives its paging loop from the header will
+  request permanently empty pages. Recorded in `examples/eridu-examples.yml`.
+- **The `wp-abilities/v1` namespace is registered but auth-gated.** This is the agent-facing Abilities
+  surface WordPress core is standardising on; `GET /wp-json/wp-abilities/v1/abilities` returns 401
+  anonymously, so its ability list could not be enumerated and nothing was inferred from it.
+
+## Artifacts
+
+| Directory | What is in it |
+|---|---|
+| `apis.yml` | APIs.json 0.20 profile — company identity, 7 API entries, artifact pointers |
+| `openapi/` | 7 OpenAPI 3.1 documents, 20 operations, derived from the live route index |
+| `openapi/_original/` | The provider's own `/wp-json/` route index, verbatim |
+| `overlays/` | OpenAPI Overlay 1.0.0 per spec, recording API Evangelist enhancements |
+| `authentication/` | Auth profile — HTTP Basic application passwords, writes only |
+| `conventions/` | Pagination, field selection, hypermedia, tracing, versioning, caching |
+| `errors/` | The WordPress error envelope and five live-captured problem types |
+| `examples/` | 10 worked requests + 5 error cases, all captured live |
+| `data-model/` | Entity graph and relationships, derived from `_links` and the type registry |
+| `conformance/` | 19 standards assessed — what it does and does not conform to |
+| `lifecycle/` | Versioning, stability risk, and the absence of status page / deprecation policy |
+| `rate-limits/` | Measured zero — no rate-limit headers are returned |
+| `plans/` | Measured zero — no pricing of any kind is published |
+| `packages/` | Measured zero — with the two same-named third-party packages explicitly excluded |
+| `well-known/` | Probe record: every `/.well-known/` path returned 404 |
+| `security/` | TLS/DNS posture probe (no HSTS, no DNSSEC, no CAA; SPF and DMARC present) |
+| `mcp/` | Candidate tool manifest + tool crosswalk — Eridu operates no MCP server |
+| `agentic-access/` | Recommended `x-agentic-access` contracts for all 20 operations |
+| `skills/` | 4 packaged Agent Skills grounded in real operationIds |
+| `llms/` | `llms.txt` generated for this profile (Eridu serves none) |
+
+Not present because the provider has no such surface: `asyncapi/`, `a2a/`, `graphql/`, `grpc/`,
+`scopes/`, `sandbox/`, `cli/`, `components/`, `changelog/`.

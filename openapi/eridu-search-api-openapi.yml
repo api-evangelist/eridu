@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: Eridu Search API
+  version: 1.0.0
+  summary: Anonymous cross-content search over eridu.ai
+  description: 'Anonymous cross-content search over eridu.ai — posts and pages — returning lightweight
+    id / title / url / type / subtype records.
+
+
+    Eridu publishes no developer program, no developer portal and no product API. This document is an
+    API Evangelist derivation of the only machine-readable interface the company serves — the WordPress
+    core REST API behind eridu.ai — captured from the provider''s own live self-describing route index
+    on 2026-08-12. It is read-only and anonymously readable; write methods exist on the same routes but
+    require a WordPress user with an application password.'
+  contact:
+    name: Eridu
+    url: https://eridu.ai/contact/
+  termsOfService: https://eridu.ai/terms-of-use/
+  x-apievangelist-derived-from: https://eridu.ai/wp-json/
+  x-apievangelist-derived-on: '2026-08-12'
+servers:
+- url: https://eridu.ai/wp-json
+  description: Eridu WordPress REST API
+tags:
+- name: Search
+  description: Anonymous cross-content search over eridu.ai — posts and pages — returning lightweight
+    id / title / url / type / subtype records.
+security: []
+paths:
+  /wp/v2/search:
+    get:
+      operationId: search
+      summary: Search site content
+      description: Search across published posts and pages on eridu.ai.
+      tags:
+      - Search
+      security: []
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchItem'
+          headers:
+            X-WP-Total:
+              description: Total number of matching records across all pages.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available at the current per_page size.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+      - name: context
+        in: query
+        required: false
+        description: Scope under which the request is made; determines fields present in response.
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          default: view
+      - name: exclude
+        in: query
+        required: false
+        description: Ensure result set excludes specific IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+          default: []
+      - name: include
+        in: query
+        required: false
+        description: Limit result set to specific IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+          default: []
+      - name: page
+        in: query
+        required: false
+        description: Current page of the collection.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: per_page
+        in: query
+        required: false
+        description: Maximum number of items to be returned in result set.
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+      - name: search
+        in: query
+        required: false
+        description: Limit results to those matching a string.
+        schema:
+          type: string
+      - name: subtype
+        in: query
+        required: false
+        description: Limit results to items of one or more object subtypes.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - post
+            - page
+            - category
+            - post_tag
+            - any
+      - name: type
+        in: query
+        required: false
+        description: Limit results to items of an object type.
+        schema:
+          type: string
+          enum:
+          - post
+          - term
+          - post-format
+          default: post
+components:
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: 'WordPress application passwords (HTTP Basic: username + application password). Advertised
+        by the site''s own API index at https://eridu.ai/wp-json/ under `authentication.application-passwords`.
+        Required only for write methods and non-public contexts; every operation in this document is anonymously
+        readable.'
+  schemas:
+    SearchItem:
+      type: object
+      description: A search record as returned by the WordPress core REST API. Field-level schemas are
+        published by the endpoint itself via the OPTIONS method and the `context=edit` schema; they are
+        not restated here so this document never diverges from the live contract.
+      additionalProperties: true
+    Error:
+      type: object
+      description: The WordPress REST API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_post_invalid_id.
+        message:
+          type: string
+          description: Human-readable error message.
+        data:
+          type: object
+          description: Error data, carrying the HTTP status and, for validation failures, per-parameter
+            details.
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code.
+          additionalProperties: true
+      required:
+      - code
+      - message
+  responses:
+    BadRequest:
+      description: Invalid parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication is required for the requested context.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matches the supplied identifier.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

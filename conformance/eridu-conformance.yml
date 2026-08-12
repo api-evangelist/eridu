@@ -1,0 +1,81 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/eridu-*-api-openapi.yml, live responses from https://eridu.ai/wp-json, and
+  security/eridu-domain-security.yml. Eridu publishes no compliance or certification page, so nothing
+  here is a provider claim.
+note: >-
+  No SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP or GDPR programme is published anywhere on eridu.ai and
+  no trust centre was found (security/eridu-trust-center.yml was not written because the probe did not
+  hit). NO `Compliance` and NO `TrustCenter` pointer is emitted in apis.yml.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in any spec; /.well-known/oauth-authorization-server returned 404.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returned 404.
+- id: http-basic-rfc7617
+  conforms: true
+  evidence: >-
+    The site's own API index advertises authentication.application-passwords, which is HTTP Basic over
+    TLS. Write-only; anonymous reads need no credential.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are application/json with the WordPress envelope {code,message,data.status}; no
+    application/problem+json and no type URI. See errors/eridu-problem-types.yml.
+- id: rfc8288-web-linking
+  conforms: true
+  evidence: >-
+    Collection responses carry Link: rel="next"/"prev"; every response carries
+    Link: <https://eridu.ai/wp-json/>; rel="https://api.w.org/".
+- id: hal-style-hypermedia
+  conforms: partial
+  evidence: >-
+    Records embed a `_links` object with self/collection/about/author/wp:term/wp:attachment and a
+    curies block, and `_embed` inlines them under `_embedded`. It is HAL-shaped but the media type is
+    application/json, not application/hal+json.
+- id: oembed-1.0
+  conforms: true
+  evidence: >-
+    /oembed/1.0/embed is a registered oEmbed 1.0 provider endpoint; the homepage advertises
+    application/json+oembed and text/xml+oembed discovery links.
+- id: json-api
+  conforms: false
+  evidence: Not a JSON:API implementation — no data/attributes/relationships envelope, no application/vnd.api+json.
+- id: openapi
+  conforms: false
+  evidence: >-
+    Eridu publishes no OpenAPI. The seven documents in openapi/ are API Evangelist derivations of the
+    provider's live self-describing route index, not provider artifacts.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returned 404.
+- id: rfc8615-well-known
+  conforms: false
+  evidence: Every /.well-known/ path probed returned 404. See well-known/eridu-well-known.yml.
+- id: a2a-agent-card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json both returned 404.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook surface is published; not applicable to this provider.
+- id: tls-1.3
+  conforms: true
+  evidence: 'eridu.ai negotiates TLSv1.3; certificate valid to 2026-10-09 (security/eridu-domain-security.yml).'
+- id: hsts-rfc6797
+  conforms: false
+  evidence: No Strict-Transport-Security header on eridu.ai.
+- id: dnssec
+  conforms: false
+  evidence: eridu.ai is not DNSSEC-signed.
+- id: caa-rfc8659
+  conforms: false
+  evidence: No CAA records published for eridu.ai.
+- id: spf
+  conforms: true
+  evidence: SPF record present for eridu.ai.
+- id: dmarc
+  conforms: true
+  evidence: 'DMARC published with policy p=quarantine.'

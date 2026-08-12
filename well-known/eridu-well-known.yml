@@ -1,0 +1,43 @@
+generated: '2026-08-12'
+method: probed
+source: live GET probes of https://eridu.ai/.well-known/* on 2026-08-12
+host: https://eridu.ai
+note: >-
+  Every /.well-known/ path probed on the single Eridu host returned 404 with an HTML body from the
+  WordPress theme. Eridu serves no discovery documents at any well-known location, so NO WellKnown
+  and NO SecurityTxt pointer is emitted in apis.yml — this file records a measured absence, not a
+  presence. The site's only discovery surface is the WordPress REST API index at
+  https://eridu.ai/wp-json/, which is linked from every response via the
+  `Link: <https://eridu.ai/wp-json/>; rel="https://api.w.org/"` header rather than from /.well-known/.
+documents:
+- path: /.well-known/security.txt
+  status: 404
+  file: null
+- path: /.well-known/openid-configuration
+  status: 404
+  file: null
+- path: /.well-known/oauth-authorization-server
+  status: 404
+  file: null
+- path: /.well-known/api-catalog
+  status: 404
+  file: null
+- path: /.well-known/ai-plugin.json
+  status: 404
+  file: null
+- path: /.well-known/agent-card.json
+  status: 404
+  file: null
+- path: /.well-known/agent.json
+  status: 404
+  file: null
+alternate_discovery:
+- path: /wp-json/
+  status: 200
+  content_type: application/json
+  note: WordPress REST API self-describing index; 167 routes across 7 namespaces at capture.
+- path: /robots.txt
+  status: 200
+  note: Disallows /wp-admin/ only; declares https://eridu.ai/wp-sitemap.xml.
+- path: /wp-sitemap.xml
+  status: 200

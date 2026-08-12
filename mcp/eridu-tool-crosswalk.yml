@@ -1,0 +1,182 @@
+generated: '2026-08-12'
+method: derived
+source: mcp/eridu-mcp.yml + openapi/eridu-*-api-openapi.yml
+note: 'Every row is a 1:1 binding at confidence high, because the tool list was derived FROM the OpenAPI
+  rather than harvested from a live tools/list — there is no published MCP server to diverge from. That
+  makes mcp_only[] and rest_only[] both empty by construction, and this crosswalk is best read as the
+  input-schema map for the candidate manifest: each tool inherits its real parameters from the named operation.
+  If Eridu ever ships an MCP server, re-derive this file from its tools/list and the empty divergence
+  lists become meaningful.'
+surfaces:
+  openapi:
+    files:
+    - eridu-content-api-openapi.yml
+    - eridu-discovery-api-openapi.yml
+    - eridu-media-api-openapi.yml
+    - eridu-oembed-api-openapi.yml
+    - eridu-pages-api-openapi.yml
+    - eridu-search-api-openapi.yml
+    - eridu-taxonomy-api-openapi.yml
+    gated: false
+    note: API Evangelist derivations of https://eridu.ai/wp-json/; Eridu publishes no OpenAPI.
+  graphql:
+    endpoint: null
+    gated: null
+    note: No GraphQL surface; /graphql is not registered.
+  mcp:
+    url: null
+    gated: null
+    note: No MCP server operated by Eridu.
+  wp_abilities:
+    endpoint: https://eridu.ai/wp-json/wp-abilities/v1/abilities
+    gated: true
+    note: Registered but returns 401 anonymously; the ability list could not be enumerated.
+crosswalk:
+- tool: eridu_list_posts
+  category: content
+  rest:
+  - listPosts
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-content-api-openapi.yml (27 parameter(s)).
+- tool: eridu_get_post
+  category: content
+  rest:
+  - getPost
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-content-api-openapi.yml (4 parameter(s)).
+- tool: eridu_list_pages
+  category: content
+  rest:
+  - listPages
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-pages-api-openapi.yml (22 parameter(s)).
+- tool: eridu_get_page
+  category: content
+  rest:
+  - getPage
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-pages-api-openapi.yml (4 parameter(s)).
+- tool: eridu_get_api_index
+  category: discovery
+  rest:
+  - getApiIndex
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-discovery-api-openapi.yml (1 parameter(s)).
+- tool: eridu_list_types
+  category: discovery
+  rest:
+  - listTypes
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-discovery-api-openapi.yml (1 parameter(s)).
+- tool: eridu_get_type
+  category: discovery
+  rest:
+  - getType
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-discovery-api-openapi.yml (2 parameter(s)).
+- tool: eridu_list_taxonomies
+  category: discovery
+  rest:
+  - listTaxonomies
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-discovery-api-openapi.yml (2 parameter(s)).
+- tool: eridu_get_taxonomy
+  category: discovery
+  rest:
+  - getTaxonomy
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-discovery-api-openapi.yml (2 parameter(s)).
+- tool: eridu_list_statuses
+  category: discovery
+  rest:
+  - listStatuses
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-discovery-api-openapi.yml (1 parameter(s)).
+- tool: eridu_list_users
+  category: discovery
+  rest:
+  - listUsers
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-discovery-api-openapi.yml (15 parameter(s)).
+- tool: eridu_get_user
+  category: discovery
+  rest:
+  - getUser
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-discovery-api-openapi.yml (2 parameter(s)).
+- tool: eridu_list_media
+  category: media
+  rest:
+  - listMedia
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-media-api-openapi.yml (23 parameter(s)).
+- tool: eridu_get_media_item
+  category: media
+  rest:
+  - getMediaItem
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-media-api-openapi.yml (2 parameter(s)).
+- tool: eridu_get_oembed
+  category: metadata
+  rest:
+  - getOembed
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-oembed-api-openapi.yml (3 parameter(s)).
+- tool: eridu_search
+  category: search
+  rest:
+  - search
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-search-api-openapi.yml (8 parameter(s)).
+- tool: eridu_list_categories
+  category: taxonomy
+  rest:
+  - listCategories
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-taxonomy-api-openapi.yml (12 parameter(s)).
+- tool: eridu_get_category
+  category: taxonomy
+  rest:
+  - getCategory
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-taxonomy-api-openapi.yml (2 parameter(s)).
+- tool: eridu_list_tags
+  category: taxonomy
+  rest:
+  - listTags
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-taxonomy-api-openapi.yml (12 parameter(s)).
+- tool: eridu_get_tag
+  category: taxonomy
+  rest:
+  - getTag
+  binding: rest
+  confidence: high
+  note: Inherits inputSchema from openapi/eridu-taxonomy-api-openapi.yml (2 parameter(s)).
+mcp_only: []
+rest_only: []
+coverage:
+  tools_named: 20
+  tools_bound: 20
+  mcp_only: 0
+  rest_ops_total: 20
+  rest_ops_with_tool: 20

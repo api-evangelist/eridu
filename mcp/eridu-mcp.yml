@@ -1,0 +1,190 @@
+generated: '2026-08-12'
+method: derived
+status: candidate
+source: openapi/eridu-*-api-openapi.yml
+note: 'Eridu operates NO MCP server. No mcp.eridu.ai host resolves, no MCP endpoint is documented, no
+  server is listed in any public MCP registry, and the site publishes no agent guidance. This is a CANDIDATE
+  manifest derived by API Evangelist from the OpenAPI documents in this repo, which are themselves derived
+  from the provider''s live WordPress REST route index. It describes the tool surface a hosted MCP server
+  WOULD expose for this API; it is not a claim that Eridu ships one. Every tool is read-only — the whole
+  anonymous surface is GET.
+
+  One adjacent fact worth recording: eridu.ai registers the WordPress Abilities API namespace (wp-abilities/v1),
+  the agent-facing surface WordPress core is standardising on. It is fully auth-gated — GET /wp-json/wp-abilities/v1/abilities
+  returns 401 anonymously — so its ability list could not be enumerated and none of it is represented
+  below.
+
+  NO `MCPServer` pointer is emitted in apis.yml for this file. The mcp_server_present check (4 pts ergonomics)
+  and the agent-readiness mcp_server dimension (12 pts) both assert that the PROVIDER operates a server.
+  Eridu does not, so pointing at a candidate manifest would be false credit. Only the ToolCrosswalk pointer
+  is wired.'
+server:
+  name: eridu
+  transport: null
+  url: null
+  published: false
+auth:
+  required: false
+  note: All candidate tools map to anonymously readable GET operations.
+tool_count: 20
+tools:
+- name: eridu_list_posts
+  category: content
+  description: List Eridu news and press posts published at eridu.ai.
+  source_operation: openapi/eridu-content-api-openapi.yml#listPosts
+  http: GET https://eridu.ai/wp-json/wp/v2/posts
+  input_schema_source: openapi/eridu-content-api-openapi.yml -> paths['/wp/v2/posts'].get.parameters (27
+    parameter(s))
+  read_only: true
+- name: eridu_get_post
+  category: content
+  description: Retrieve a single Eridu post by id.
+  source_operation: openapi/eridu-content-api-openapi.yml#getPost
+  http: GET https://eridu.ai/wp-json/wp/v2/posts/{id}
+  input_schema_source: 'openapi/eridu-content-api-openapi.yml -> paths[''/wp/v2/posts/{id}''].get.parameters
+    (4 parameter(s), required: id)'
+  read_only: true
+- name: eridu_get_api_index
+  category: discovery
+  description: Read the live self-describing route index for eridu.ai.
+  source_operation: openapi/eridu-discovery-api-openapi.yml#getApiIndex
+  http: GET https://eridu.ai/wp-json/
+  input_schema_source: openapi/eridu-discovery-api-openapi.yml -> paths['/'].get.parameters (1 parameter(s))
+  read_only: true
+- name: eridu_list_types
+  category: discovery
+  description: List registered content types and their REST bases.
+  source_operation: openapi/eridu-discovery-api-openapi.yml#listTypes
+  http: GET https://eridu.ai/wp-json/wp/v2/types
+  input_schema_source: openapi/eridu-discovery-api-openapi.yml -> paths['/wp/v2/types'].get.parameters
+    (1 parameter(s))
+  read_only: true
+- name: eridu_get_type
+  category: discovery
+  description: Retrieve a single registered content type.
+  source_operation: openapi/eridu-discovery-api-openapi.yml#getType
+  http: GET https://eridu.ai/wp-json/wp/v2/types/{type}
+  input_schema_source: 'openapi/eridu-discovery-api-openapi.yml -> paths[''/wp/v2/types/{type}''].get.parameters
+    (2 parameter(s), required: type)'
+  read_only: true
+- name: eridu_list_taxonomies
+  category: discovery
+  description: List registered taxonomies.
+  source_operation: openapi/eridu-discovery-api-openapi.yml#listTaxonomies
+  http: GET https://eridu.ai/wp-json/wp/v2/taxonomies
+  input_schema_source: openapi/eridu-discovery-api-openapi.yml -> paths['/wp/v2/taxonomies'].get.parameters
+    (2 parameter(s))
+  read_only: true
+- name: eridu_get_taxonomy
+  category: discovery
+  description: Retrieve a single registered taxonomy.
+  source_operation: openapi/eridu-discovery-api-openapi.yml#getTaxonomy
+  http: GET https://eridu.ai/wp-json/wp/v2/taxonomies/{taxonomy}
+  input_schema_source: 'openapi/eridu-discovery-api-openapi.yml -> paths[''/wp/v2/taxonomies/{taxonomy}''].get.parameters
+    (2 parameter(s), required: taxonomy)'
+  read_only: true
+- name: eridu_list_statuses
+  category: discovery
+  description: List publication statuses registered on the site.
+  source_operation: openapi/eridu-discovery-api-openapi.yml#listStatuses
+  http: GET https://eridu.ai/wp-json/wp/v2/statuses
+  input_schema_source: openapi/eridu-discovery-api-openapi.yml -> paths['/wp/v2/statuses'].get.parameters
+    (1 parameter(s))
+  read_only: true
+- name: eridu_list_users
+  category: discovery
+  description: List the public author records for eridu.ai.
+  source_operation: openapi/eridu-discovery-api-openapi.yml#listUsers
+  http: GET https://eridu.ai/wp-json/wp/v2/users
+  input_schema_source: openapi/eridu-discovery-api-openapi.yml -> paths['/wp/v2/users'].get.parameters
+    (15 parameter(s))
+  read_only: true
+- name: eridu_get_user
+  category: discovery
+  description: Retrieve a single public author record by id.
+  source_operation: openapi/eridu-discovery-api-openapi.yml#getUser
+  http: GET https://eridu.ai/wp-json/wp/v2/users/{id}
+  input_schema_source: 'openapi/eridu-discovery-api-openapi.yml -> paths[''/wp/v2/users/{id}''].get.parameters
+    (2 parameter(s), required: id)'
+  read_only: true
+- name: eridu_list_media
+  category: media
+  description: List media attachments in the eridu.ai library.
+  source_operation: openapi/eridu-media-api-openapi.yml#listMedia
+  http: GET https://eridu.ai/wp-json/wp/v2/media
+  input_schema_source: openapi/eridu-media-api-openapi.yml -> paths['/wp/v2/media'].get.parameters (23
+    parameter(s))
+  read_only: true
+- name: eridu_get_media_item
+  category: media
+  description: Retrieve a single eridu.ai media attachment by id.
+  source_operation: openapi/eridu-media-api-openapi.yml#getMediaItem
+  http: GET https://eridu.ai/wp-json/wp/v2/media/{id}
+  input_schema_source: 'openapi/eridu-media-api-openapi.yml -> paths[''/wp/v2/media/{id}''].get.parameters
+    (2 parameter(s), required: id)'
+  read_only: true
+- name: eridu_get_oembed
+  category: metadata
+  description: Return oEmbed 1.0 metadata for an eridu.ai URL.
+  source_operation: openapi/eridu-oembed-api-openapi.yml#getOembed
+  http: GET https://eridu.ai/wp-json/oembed/1.0/embed
+  input_schema_source: 'openapi/eridu-oembed-api-openapi.yml -> paths[''/oembed/1.0/embed''].get.parameters
+    (3 parameter(s), required: url)'
+  read_only: true
+- name: eridu_list_pages
+  category: content
+  description: List the static pages of eridu.ai (Company, Leadership, Careers, Contact, Resources, Terms,
+    Privacy).
+  source_operation: openapi/eridu-pages-api-openapi.yml#listPages
+  http: GET https://eridu.ai/wp-json/wp/v2/pages
+  input_schema_source: openapi/eridu-pages-api-openapi.yml -> paths['/wp/v2/pages'].get.parameters (22
+    parameter(s))
+  read_only: true
+- name: eridu_get_page
+  category: content
+  description: Retrieve a single eridu.ai page by id.
+  source_operation: openapi/eridu-pages-api-openapi.yml#getPage
+  http: GET https://eridu.ai/wp-json/wp/v2/pages/{id}
+  input_schema_source: 'openapi/eridu-pages-api-openapi.yml -> paths[''/wp/v2/pages/{id}''].get.parameters
+    (4 parameter(s), required: id)'
+  read_only: true
+- name: eridu_search
+  category: search
+  description: Search across published posts and pages on eridu.ai.
+  source_operation: openapi/eridu-search-api-openapi.yml#search
+  http: GET https://eridu.ai/wp-json/wp/v2/search
+  input_schema_source: openapi/eridu-search-api-openapi.yml -> paths['/wp/v2/search'].get.parameters (8
+    parameter(s))
+  read_only: true
+- name: eridu_list_categories
+  category: taxonomy
+  description: List post categories registered on eridu.ai.
+  source_operation: openapi/eridu-taxonomy-api-openapi.yml#listCategories
+  http: GET https://eridu.ai/wp-json/wp/v2/categories
+  input_schema_source: openapi/eridu-taxonomy-api-openapi.yml -> paths['/wp/v2/categories'].get.parameters
+    (12 parameter(s))
+  read_only: true
+- name: eridu_get_category
+  category: taxonomy
+  description: Retrieve a single eridu.ai category by id.
+  source_operation: openapi/eridu-taxonomy-api-openapi.yml#getCategory
+  http: GET https://eridu.ai/wp-json/wp/v2/categories/{id}
+  input_schema_source: 'openapi/eridu-taxonomy-api-openapi.yml -> paths[''/wp/v2/categories/{id}''].get.parameters
+    (2 parameter(s), required: id)'
+  read_only: true
+- name: eridu_list_tags
+  category: taxonomy
+  description: List post tags registered on eridu.ai.
+  source_operation: openapi/eridu-taxonomy-api-openapi.yml#listTags
+  http: GET https://eridu.ai/wp-json/wp/v2/tags
+  input_schema_source: openapi/eridu-taxonomy-api-openapi.yml -> paths['/wp/v2/tags'].get.parameters (12
+    parameter(s))
+  read_only: true
+- name: eridu_get_tag
+  category: taxonomy
+  description: Retrieve a single eridu.ai tag by id.
+  source_operation: openapi/eridu-taxonomy-api-openapi.yml#getTag
+  http: GET https://eridu.ai/wp-json/wp/v2/tags/{id}
+  input_schema_source: 'openapi/eridu-taxonomy-api-openapi.yml -> paths[''/wp/v2/tags/{id}''].get.parameters
+    (2 parameter(s), required: id)'
+  read_only: true

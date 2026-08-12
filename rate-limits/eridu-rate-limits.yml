@@ -1,0 +1,33 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  Live response headers observed on https://eridu.ai/wp-json/wp/v2/posts and sibling collections,
+  2026-08-12, plus a site-wide search for a published limits policy.
+limit_count: 0
+note: >-
+  Eridu publishes no rate limits and returns no rate-limit signal. No RateLimit-*, X-RateLimit-* or
+  Retry-After header appeared on any 200 response. This is an honest zero, not an unmeasured gap: the
+  headers were read off live responses. An agent calling this surface has no runtime budget signal and
+  must self-throttle. The only enforcement observed is per-request validation — per_page is capped at
+  100 and a larger value returns 400 rest_invalid_param, which is a page-size bound, not a rate limit.
+limits: []
+response_headers:
+  rate_limit_headers_present: false
+  observed_on_200:
+  - X-WP-Total
+  - X-WP-TotalPages
+  - Link
+  - cf-ray
+  - cf-cache-status
+  - x-kinsta-cache
+  - x-robots-tag
+  exhaustion_status: null
+edge_note: >-
+  eridu.ai sits behind Cloudflare (cf-ray present) on Kinsta hosting (x-kinsta-cache, ki-edge). Either
+  layer may apply undocumented bot or burst protection that surfaces as a 429 or an interstitial
+  without a documented budget; none was triggered during this pass.
+page_size:
+  param: per_page
+  default: 10
+  max: 100
+  on_exceed: '400 rest_invalid_param — "per_page must be between 1 (inclusive) and 100 (inclusive)"'

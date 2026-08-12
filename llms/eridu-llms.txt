@@ -1,0 +1,99 @@
+# Eridu
+
+> Eridu is an AI networking infrastructure company founded in 2024 and based in Saratoga, California,
+> building a clean-sheet network switch architecture — silicon, systems and software together — for the
+> interconnect bottleneck inside large AI training clusters. It emerged from stealth in March 2026 with
+> a Series A of more than $200M (approximately $230M total). Eridu is a semiconductor and systems
+> company: it publishes no developer program, no developer portal, no product API, no SDKs and no
+> pricing. The only machine-readable interface it serves is the WordPress core REST API behind its
+> corporate site at eridu.ai, catalogued below for discovery. That surface is anonymous, read-only in
+> practice, and carries company content — not product data.
+
+Generated: 2026-08-12
+Method: generated (Eridu serves no /llms.txt — https://eridu.ai/llms.txt returned 404 on 2026-08-12)
+Source: https://raw.githubusercontent.com/api-evangelist/eridu/refs/heads/main/apis.yml
+
+## What is NOT here
+
+- No product API, no developer portal, no API reference, no getting-started guide.
+- No SDKs or client libraries on any registry. The `eridu` package on PyPI belongs to Graphlet AI and
+  `eridu-tech` on npm belongs to a separate Irish company; neither is this provider.
+- No MCP server, no A2A agent card, no GraphQL endpoint, no webhooks, no AsyncAPI, no gRPC.
+- No `/.well-known/` documents of any kind — every path probed returned 404.
+- No status page, no changelog, no deprecation policy, no SLA, no published rate limits, no pricing.
+- No GitHub organization (github.com/eridu and github.com/eridu-ai both 404).
+
+## APIs
+
+All seven entries below are projections of one surface, `https://eridu.ai/wp-json`, and all are
+anonymous and read-only. The OpenAPI documents are API Evangelist derivations of the provider's own
+live self-describing route index; Eridu publishes no OpenAPI.
+
+- [Eridu Content API](https://eridu.ai/wp-json/wp/v2/posts): News and press archive. 1 published post at capture.
+- [Eridu Pages API](https://eridu.ai/wp-json/wp/v2/pages): 13 static marketing and policy pages — Company, Leadership, Careers, Contact, Resources, Newsletter, Terms, Privacy.
+- [Eridu Media API](https://eridu.ai/wp-json/wp/v2/media): Media library. Header reports 115 attachments; only 21 are anonymously retrievable.
+- [Eridu Taxonomy API](https://eridu.ai/wp-json/wp/v2/categories): Post categories and tags. 1 of each; no custom taxonomies.
+- [Eridu Search API](https://eridu.ai/wp-json/wp/v2/search): Cross-content search over posts and pages. 14 searchable objects.
+- [Eridu Discovery API](https://eridu.ai/wp-json/): Self-describing route index — 167 routes across 7 namespaces — plus types, taxonomies, statuses and public authors.
+- [Eridu oEmbed API](https://eridu.ai/wp-json/oembed/1.0/embed): oEmbed 1.0 provider endpoint for eridu.ai URLs.
+
+## Specs
+
+- [Content OpenAPI 3.1](openapi/eridu-content-api-openapi.yml)
+- [Pages OpenAPI 3.1](openapi/eridu-pages-api-openapi.yml)
+- [Media OpenAPI 3.1](openapi/eridu-media-api-openapi.yml)
+- [Taxonomy OpenAPI 3.1](openapi/eridu-taxonomy-api-openapi.yml)
+- [Search OpenAPI 3.1](openapi/eridu-search-api-openapi.yml)
+- [Discovery OpenAPI 3.1](openapi/eridu-discovery-api-openapi.yml)
+- [oEmbed OpenAPI 3.1](openapi/eridu-oembed-api-openapi.yml)
+- [Provider route index, verbatim](openapi/_original/eridu-wp-json-index.json)
+
+## How to call it
+
+- Base URL: `https://eridu.ai/wp-json`. No key, no signup, no OAuth.
+- Read `GET /wp-json/` first — the route set is a function of the site's installed plugins and changes
+  without notice.
+- Pagination: `page` (1-based) + `per_page` (default 10, max 100); totals in `X-WP-Total` and
+  `X-WP-TotalPages`. **On `/wp/v2/media` the total header disagrees with what you can read** — page
+  until a short body, not until the header total.
+- Shape the payload with `_fields=` and resolve relationships in one call with `_embed`.
+- `context=edit` returns 401 anonymously. Use the default `context=view`.
+- Errors are the WordPress envelope `{code, message, data:{status}}`, not RFC 9457. Match on `code`.
+- No rate-limit headers are returned. Self-throttle.
+- The `wp-abilities/v1` namespace is registered but returns 401 anonymously; its abilities cannot be
+  enumerated without a WordPress application password.
+
+## Artifacts
+
+- [Authentication](authentication/eridu-authentication.yml)
+- [Conventions](conventions/eridu-conventions.yml)
+- [Error catalog](errors/eridu-problem-types.yml)
+- [Data model](data-model/eridu-data-model.yml)
+- [Worked examples, captured live](examples/eridu-examples.yml)
+- [Conformance](conformance/eridu-conformance.yml)
+- [Lifecycle](lifecycle/eridu-lifecycle.yml)
+- [Rate limits](rate-limits/eridu-rate-limits.yml)
+- [Plans and pricing](plans/eridu-plans-pricing.yml)
+- [Packages](packages/eridu-packages.yml)
+- [Well-known probe](well-known/eridu-well-known.yml)
+- [Domain security](security/eridu-domain-security.yml)
+- [MCP candidate manifest](mcp/eridu-mcp.yml)
+- [Tool crosswalk](mcp/eridu-tool-crosswalk.yml)
+- [Agentic access](agentic-access/eridu-agentic-access.yml)
+- [Agent skills](skills/_index.yml)
+
+## Company
+
+- [Website](https://eridu.ai/)
+- [Company](https://eridu.ai/company/)
+- [Leadership](https://eridu.ai/company/leadership/)
+- [Resources](https://eridu.ai/resources/)
+- [Press releases](https://eridu.ai/resources/press-releases/)
+- [Blog](https://eridu.ai/resources/blog/)
+- [Blog RSS](https://eridu.ai/feed/)
+- [Careers](https://ats.rippling.com/eridu-ai/jobs)
+- [Contact](https://eridu.ai/contact/)
+- [Terms of Use](https://eridu.ai/terms-of-use/)
+- [Privacy Policy](https://eridu.ai/privacy/)
+- [LinkedIn](https://www.linkedin.com/company/eridu-ai/)
+- [X](https://x.com/EriduAI)

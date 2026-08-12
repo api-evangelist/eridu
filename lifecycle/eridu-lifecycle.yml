@@ -1,0 +1,51 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/eridu-*-api-openapi.yml, the live namespace list at https://eridu.ai/wp-json/, and site
+  searches for a status page, changelog, deprecation policy and SLA on 2026-08-12.
+note: >-
+  Eridu publishes no API lifecycle commitments of any kind. Because there is no status page and no
+  deprecation policy, NO `StatusPage` and NO `Deprecation` pointer is emitted in apis.yml — those
+  checks are honestly unmet rather than papered over.
+versioning:
+  scheme: uri-namespace
+  current: wp/v2
+  docs: null
+  note: >-
+    The version segment is the WordPress core namespace, not an Eridu decision. wp/v2 has been stable
+    since WordPress 4.7 (2016).
+namespaces_at_capture:
+- wp/v2
+- oembed/1.0
+- wp-site-health/v1
+- wp-block-editor/v1
+- wp-abilities/v1
+- contact-form-7/v1
+- redirection/v1
+stability:
+  risk: >-
+    The route set is a function of the site's installed plugin list, which the marketing team changes
+    without an announcement channel. Three of the seven namespaces (contact-form-7, redirection,
+    wp-abilities) are plugin- or version-supplied and can disappear on any update. Consumers should
+    re-read GET /wp-json/ rather than pin routes.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: No RFC 8594 Sunset or Deprecation header observed; no published deprecation policy.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+status_page_note: >-
+  No status.eridu.ai, no /status page and no third-party status page (Statuspage/Instatus) is linked
+  from the site. Hosting is Kinsta behind Cloudflare, whose status pages cover the platform, not Eridu.
+changelog: null
+changelog_note: >-
+  The site has a Resources section with a blog and press releases, but no dated API or product
+  changelog. NO `ChangeLog` pointer is emitted.
+support:
+  channel: info@eridu.ai
+  form: https://eridu.ai/contact/
+  note: General company contact only; there is no developer support channel.
+deprecated_operations: []

@@ -1,0 +1,43 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  npm, PyPI, RubyGems, crates.io, NuGet, Maven Central, pkg.go.dev and Packagist searched for
+  first-party "eridu" client libraries on 2026-08-12; eridu.ai searched for an SDK or downloads page.
+package_count: 0
+official_package_count: 0
+note: >-
+  Eridu ships no client libraries. github.com/eridu and github.com/eridu-ai both return 404, the site
+  links no GitHub organization, and there is no SDK or downloads page. Nothing first-party exists on
+  any public registry — the "eridu" names that DO exist on npm and PyPI belong to two other companies
+  entirely (see near_miss below) and are deliberately NOT listed as packages, because attributing them
+  to this provider would be false. Because there is no official SDK, NO `SDKs` pointer
+  is emitted in apis.yml; the `Packages` pointer records the measured zero.
+  Consumers of the WordPress REST API surface catalogued in this repo would use a generic WordPress
+  REST client (e.g. @wordpress/api-fetch on npm), which is a WordPress project, not an Eridu one.
+packages: []
+registries_checked:
+- registry: npm
+  first_party_hit: false
+  query: https://registry.npmjs.org/-/v1/search?text=eridu
+  near_miss: >-
+    `eridu-tech` 0.58.0 — homepage eridu-tech.io, a separate Irish company also trading as Eridu Tech.
+    Not this provider; excluded.
+- registry: pypi
+  first_party_hit: false
+  query: https://pypi.org/pypi/eridu/json
+  near_miss: >-
+    `eridu` 0.1.5 — "Deep fuzzy matching people and company names for multilingual entity resolution",
+    published by Graphlet AI (github.com/Graphlet-AI/eridu). A different company that happens to share
+    the Sumerian city name. Not this provider; excluded.
+- registry: rubygems
+  first_party_hit: false
+- registry: crates.io
+  first_party_hit: false
+- registry: nuget
+  first_party_hit: false
+- registry: maven-central
+  first_party_hit: false
+- registry: pkg.go.dev
+  first_party_hit: false
+- registry: packagist
+  first_party_hit: false

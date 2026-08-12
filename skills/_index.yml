@@ -1,0 +1,25 @@
+generated: '2026-08-12'
+method: generated
+source: >-
+  openapi/eridu-*-api-openapi.yml, conventions/eridu-conventions.yml, errors/eridu-problem-types.yml,
+  examples/eridu-examples.yml. Eridu publishes no AGENTS.md and no provider-authored skills; these are
+  API Evangelist generated operating instructions grounded in operationIds that exist verbatim in the
+  specs in this repo.
+skill_count: 4
+skills:
+- file: eridu-discover-the-surface.md
+  name: Discover the Eridu API surface
+  api: openapi/eridu-discovery-api-openapi.yml
+  operations: [getApiIndex, listTypes, listTaxonomies, getTaxonomy, listStatuses]
+- file: eridu-track-announcements.md
+  name: Track Eridu announcements and press
+  api: openapi/eridu-content-api-openapi.yml
+  operations: [listPosts, getPost, listCategories, listTags, listUsers]
+- file: eridu-read-company-profile.md
+  name: Read the Eridu company profile
+  api: openapi/eridu-pages-api-openapi.yml
+  operations: [listPages, getPage, search, listUsers]
+- file: eridu-harvest-media.md
+  name: Harvest Eridu media assets
+  api: openapi/eridu-media-api-openapi.yml
+  operations: [listMedia, getMediaItem, getOembed]

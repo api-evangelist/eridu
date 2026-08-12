@@ -1,18 +1,227 @@
 aid: eridu
 name: Eridu
-description: 'Eridu is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Eridu is an AI networking infrastructure company founded in 2024 and headquartered at 12900
+  Saratoga Ave in Saratoga, California. It is building a clean-sheet network switch architecture —
+  silicon, systems and software together — aimed at the interconnect bottleneck that limits how
+  efficiently GPUs exchange data inside large AI training clusters and data centers. The company was
+  co-founded by CEO Drew Perkins, who previously co-founded Lightera Networks (acquired by Ciena) and
+  Infinera, alongside Chief Product Officer Omar Hassen, and emerged from stealth in March 2026 with
+  an oversubscribed Series A of more than $200M led by Socratic Partners, bringing total funding to
+  approximately $230M with participation from John Doerr, Kleiner Perkins, Hudson River Trading,
+  Capricorn Investment Group, Matter Venture Partners and Fusion Fund. Eridu is a semiconductor and
+  systems company rather than a software vendor: it publishes no developer program, no developer
+  portal, no product API, no SDKs and no pricing. The only machine-readable interface it serves is the
+  WordPress core REST API behind its corporate site at eridu.ai, captured here for discovery purposes
+  and anonymously readable but effectively read-only.
 url: https://raw.githubusercontent.com/api-evangelist/eridu/refs/heads/main/apis.yml
+image: https://eridu.ai/apple-touch-icon.png
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
 - Company
-apis: []
+- Artificial Intelligence
+- AI Infrastructure
+- Networking
+- Semiconductors
+- Data Centers
+- Silicon
+- Network Switching
+- Interconnect
+- Hardware
+- Content
+apis:
+- aid: eridu:eridu-content-api
+  name: Eridu Content API
+  description: >-
+    Anonymous, unauthenticated read access to the Eridu news and press archive published at eridu.ai,
+    served by the WordPress core REST API. Verified live at 1 published post on 2026-08-12.
+  humanURL: https://eridu.ai/wp-json/
+  baseURL: https://eridu.ai/wp-json
+  tags:
+  - Content
+  - Posts
+  properties:
+  - type: OpenAPI
+    url: openapi/eridu-content-api-openapi.yml
+  - type: Overlay
+    url: overlays/eridu-content-api-overlay.yaml
+  - type: Authentication
+    url: authentication/eridu-authentication.yml
+  - type: ErrorCatalog
+    url: errors/eridu-problem-types.yml
+  - type: Conventions
+    url: conventions/eridu-conventions.yml
+  - type: DataModel
+    url: data-model/eridu-data-model.yml
+  - type: Conformance
+    url: conformance/eridu-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/eridu-lifecycle.yml
+- aid: eridu:eridu-pages-api
+  name: Eridu Pages API
+  description: >-
+    Anonymous, unauthenticated read access to the static marketing and policy pages of eridu.ai —
+    Company, Leadership, Careers, Contact, Resources, Newsletter, Terms of Use, Sales Terms and
+    Privacy Policy. Verified live at 13 published pages on 2026-08-12.
+  humanURL: https://eridu.ai/wp-json/
+  baseURL: https://eridu.ai/wp-json
+  tags:
+  - Pages
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/eridu-pages-api-openapi.yml
+  - type: Overlay
+    url: overlays/eridu-pages-api-overlay.yaml
+  - type: Authentication
+    url: authentication/eridu-authentication.yml
+  - type: ErrorCatalog
+    url: errors/eridu-problem-types.yml
+  - type: Conventions
+    url: conventions/eridu-conventions.yml
+  - type: DataModel
+    url: data-model/eridu-data-model.yml
+  - type: Conformance
+    url: conformance/eridu-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/eridu-lifecycle.yml
+- aid: eridu:eridu-media-api
+  name: Eridu Media API
+  description: >-
+    Anonymous, unauthenticated read access to the eridu.ai media library — leadership portraits,
+    careers and team photography, investor logos and press imagery, each with its generated size
+    variants. X-WP-Total reports 115 attachments, but only 21 are retrievable anonymously —
+    see the pagination defect recorded in examples/eridu-examples.yml. Verified 2026-08-12.
+  humanURL: https://eridu.ai/wp-json/
+  baseURL: https://eridu.ai/wp-json
+  tags:
+  - Media
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/eridu-media-api-openapi.yml
+  - type: Overlay
+    url: overlays/eridu-media-api-overlay.yaml
+  - type: Authentication
+    url: authentication/eridu-authentication.yml
+  - type: ErrorCatalog
+    url: errors/eridu-problem-types.yml
+  - type: Conventions
+    url: conventions/eridu-conventions.yml
+  - type: DataModel
+    url: data-model/eridu-data-model.yml
+  - type: Conformance
+    url: conformance/eridu-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/eridu-lifecycle.yml
+- aid: eridu:eridu-taxonomy-api
+  name: Eridu Taxonomy API
+  description: >-
+    Anonymous, unauthenticated read access to the classification vocabularies behind eridu.ai — post
+    categories and post tags as registered in the WordPress core REST API. Verified live at 1 category
+    and 1 tag on 2026-08-12; the site registers no custom taxonomies.
+  humanURL: https://eridu.ai/wp-json/
+  baseURL: https://eridu.ai/wp-json
+  tags:
+  - Taxonomy
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/eridu-taxonomy-api-openapi.yml
+  - type: Overlay
+    url: overlays/eridu-taxonomy-api-overlay.yaml
+  - type: Authentication
+    url: authentication/eridu-authentication.yml
+  - type: ErrorCatalog
+    url: errors/eridu-problem-types.yml
+  - type: Conventions
+    url: conventions/eridu-conventions.yml
+  - type: DataModel
+    url: data-model/eridu-data-model.yml
+  - type: Conformance
+    url: conformance/eridu-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/eridu-lifecycle.yml
+- aid: eridu:eridu-search-api
+  name: Eridu Search API
+  description: >-
+    Anonymous, unauthenticated cross-content search over eridu.ai — posts and pages — returning
+    lightweight id / title / url / type / subtype records. Verified live at 14 searchable objects on
+    2026-08-12.
+  humanURL: https://eridu.ai/wp-json/
+  baseURL: https://eridu.ai/wp-json
+  tags:
+  - Search
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/eridu-search-api-openapi.yml
+  - type: Overlay
+    url: overlays/eridu-search-api-overlay.yaml
+  - type: Authentication
+    url: authentication/eridu-authentication.yml
+  - type: ErrorCatalog
+    url: errors/eridu-problem-types.yml
+  - type: Conventions
+    url: conventions/eridu-conventions.yml
+  - type: Conformance
+    url: conformance/eridu-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/eridu-lifecycle.yml
+- aid: eridu:eridu-discovery-api
+  name: Eridu Discovery API
+  description: >-
+    Anonymous, unauthenticated discovery metadata for eridu.ai — the self-describing route index (167
+    routes across 7 namespaces at capture), the registered content types and taxonomies, the
+    publication statuses, and the public author records. This is the surface that makes the rest of
+    the API machine-readable in the absence of any published developer documentation.
+  humanURL: https://eridu.ai/wp-json/
+  baseURL: https://eridu.ai/wp-json
+  tags:
+  - Discovery
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/eridu-discovery-api-openapi.yml
+  - type: Overlay
+    url: overlays/eridu-discovery-api-overlay.yaml
+  - type: Authentication
+    url: authentication/eridu-authentication.yml
+  - type: ErrorCatalog
+    url: errors/eridu-problem-types.yml
+  - type: Conventions
+    url: conventions/eridu-conventions.yml
+  - type: Conformance
+    url: conformance/eridu-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/eridu-lifecycle.yml
+  - type: ToolCrosswalk
+    url: mcp/eridu-tool-crosswalk.yml
+- aid: eridu:eridu-oembed-api
+  name: Eridu oEmbed API
+  description: >-
+    Public oEmbed 1.0 provider endpoint for eridu.ai URLs, returning embeddable rich metadata — title,
+    author, thumbnail and iframe HTML — for any published post or page.
+  humanURL: https://eridu.ai/wp-json/oembed/1.0/embed
+  baseURL: https://eridu.ai/wp-json
+  tags:
+  - oEmbed
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/eridu-oembed-api-openapi.yml
+  - type: Overlay
+    url: overlays/eridu-oembed-api-overlay.yaml
+  - type: Authentication
+    url: authentication/eridu-authentication.yml
+  - type: ErrorCatalog
+    url: errors/eridu-problem-types.yml
+  - type: Conformance
+    url: conformance/eridu-conformance.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +229,69 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/eridu_stock/
+  url: https://eridu.ai/
+- type: About
+  url: https://eridu.ai/company/
+- type: Leadership
+  url: https://eridu.ai/company/leadership/
+- type: Blog
+  url: https://eridu.ai/resources/blog/
+- type: BlogRSS
+  url: https://eridu.ai/feed/
+- type: Press
+  url: https://eridu.ai/resources/press-releases/
+- type: News
+  url: https://eridu.ai/resources/
+- type: Contact
+  url: https://eridu.ai/contact/
+- type: Careers
+  url: https://ats.rippling.com/eridu-ai/jobs
+- type: Newsletter
+  url: https://eridu.ai/newsletter/
+- type: TermsOfService
+  url: https://eridu.ai/terms-of-use/
+- type: PrivacyPolicy
+  url: https://eridu.ai/privacy/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/eridu-ai/
+- type: Twitter
+  url: https://x.com/EriduAI
+- type: YouTube
+  url: https://www.youtube.com/watch?v=ouGlu_Xdggg
+- type: Sitemap
+  url: https://eridu.ai/wp-sitemap.xml
+- type: Authentication
+  url: authentication/eridu-authentication.yml
+- type: ErrorCatalog
+  url: errors/eridu-problem-types.yml
+- type: Conventions
+  url: conventions/eridu-conventions.yml
+- type: DataModel
+  url: data-model/eridu-data-model.yml
+- type: Conformance
+  url: conformance/eridu-conformance.yml
+- type: Lifecycle
+  url: lifecycle/eridu-lifecycle.yml
+- type: RateLimits
+  url: rate-limits/eridu-rate-limits.yml
+- type: Plans
+  url: plans/eridu-plans-pricing.yml
+- type: Packages
+  url: packages/eridu-packages.yml
+- type: LLMsTxt
+  url: llms/eridu-llms.txt
+- type: ToolCrosswalk
+  url: mcp/eridu-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Examples
+  url: examples/eridu-examples.yml
+- type: AgenticAccess
+  url: agentic-access/eridu-agentic-access.yml
+- type: DomainSecurity
+  url: security/eridu-domain-security.yml
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 36
+  pass: local-v1

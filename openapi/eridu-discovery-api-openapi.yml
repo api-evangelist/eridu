@@ -1,0 +1,545 @@
+openapi: 3.1.0
+info:
+  title: Eridu Discovery API
+  version: 1.0.0
+  summary: Anonymous discovery metadata for eridu.ai
+  description: 'Anonymous discovery metadata for eridu.ai — the self-describing route index, the registered
+    content types and taxonomies, publication statuses, and the public author records. This is the surface
+    that makes the rest of the API machine-readable in the absence of any published developer documentation.
+
+
+    Eridu publishes no developer program, no developer portal and no product API. This document is an
+    API Evangelist derivation of the only machine-readable interface the company serves — the WordPress
+    core REST API behind eridu.ai — captured from the provider''s own live self-describing route index
+    on 2026-08-12. It is read-only and anonymously readable; write methods exist on the same routes but
+    require a WordPress user with an application password.'
+  contact:
+    name: Eridu
+    url: https://eridu.ai/contact/
+  termsOfService: https://eridu.ai/terms-of-use/
+  x-apievangelist-derived-from: https://eridu.ai/wp-json/
+  x-apievangelist-derived-on: '2026-08-12'
+servers:
+- url: https://eridu.ai/wp-json
+  description: Eridu WordPress REST API
+tags:
+- name: Discovery
+  description: Anonymous discovery metadata for eridu.ai — the self-describing route index, the registered
+    content types and taxonomies, publication statuses, and the public author records. This is the surface
+    that makes the rest of the API machine-readable in the absence of any published developer documentation.
+security: []
+paths:
+  /:
+    get:
+      operationId: getApiIndex
+      summary: Get the API index
+      description: 'Retrieve the self-describing API index: site name, namespaces, authentication methods
+        and every registered route.'
+      tags:
+      - Discovery
+      security: []
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryItem'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+      - name: context
+        in: query
+        required: false
+        description: The context query parameter, as registered by the endpoint.
+        schema:
+          type: string
+          default: view
+  /wp/v2/types:
+    get:
+      operationId: listTypes
+      summary: List content types
+      description: List the registered content types and their REST bases.
+      tags:
+      - Discovery
+      security: []
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiscoveryItem'
+          headers:
+            X-WP-Total:
+              description: Total number of matching records across all pages.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available at the current per_page size.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+      - name: context
+        in: query
+        required: false
+        description: Scope under which the request is made; determines fields present in response.
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+  /wp/v2/types/{type}:
+    get:
+      operationId: getType
+      summary: Get a content type
+      description: Retrieve a single registered content type.
+      tags:
+      - Discovery
+      security: []
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryItem'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+      - name: type
+        in: path
+        required: true
+        description: An alphanumeric identifier for the post type.
+        schema:
+          type: string
+      - name: context
+        in: query
+        required: false
+        description: Scope under which the request is made; determines fields present in response.
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+  /wp/v2/taxonomies:
+    get:
+      operationId: listTaxonomies
+      summary: List taxonomies
+      description: List the registered taxonomies and the types they apply to.
+      tags:
+      - Discovery
+      security: []
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiscoveryItem'
+          headers:
+            X-WP-Total:
+              description: Total number of matching records across all pages.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available at the current per_page size.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+      - name: context
+        in: query
+        required: false
+        description: Scope under which the request is made; determines fields present in response.
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+      - name: type
+        in: query
+        required: false
+        description: Limit results to taxonomies associated with a specific post type.
+        schema:
+          type: string
+  /wp/v2/taxonomies/{taxonomy}:
+    get:
+      operationId: getTaxonomy
+      summary: Get a taxonomy
+      description: Retrieve a single registered taxonomy.
+      tags:
+      - Discovery
+      security: []
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryItem'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+      - name: taxonomy
+        in: path
+        required: true
+        description: An alphanumeric identifier for the taxonomy.
+        schema:
+          type: string
+      - name: context
+        in: query
+        required: false
+        description: Scope under which the request is made; determines fields present in response.
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+  /wp/v2/statuses:
+    get:
+      operationId: listStatuses
+      summary: List publication statuses
+      description: List the publication statuses registered on the site.
+      tags:
+      - Discovery
+      security: []
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiscoveryItem'
+          headers:
+            X-WP-Total:
+              description: Total number of matching records across all pages.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available at the current per_page size.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+      - name: context
+        in: query
+        required: false
+        description: Scope under which the request is made; determines fields present in response.
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+  /wp/v2/users:
+    get:
+      operationId: listUsers
+      summary: List authors
+      description: List the public author records for eridu.ai.
+      tags:
+      - Discovery
+      security: []
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiscoveryItem'
+          headers:
+            X-WP-Total:
+              description: Total number of matching records across all pages.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available at the current per_page size.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+      - name: capabilities
+        in: query
+        required: false
+        description: Limit result set to users matching at least one specific capability provided. Accepts
+          csv list or single capability.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: context
+        in: query
+        required: false
+        description: Scope under which the request is made; determines fields present in response.
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+      - name: exclude
+        in: query
+        required: false
+        description: Ensure result set excludes specific IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+          default: []
+      - name: has_published_posts
+        in: query
+        required: false
+        description: Limit result set to users who have published posts.
+        schema:
+          type: boolean
+      - name: include
+        in: query
+        required: false
+        description: Limit result set to specific IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+          default: []
+      - name: offset
+        in: query
+        required: false
+        description: Offset the result set by a specific number of items.
+        schema:
+          type: integer
+      - name: order
+        in: query
+        required: false
+        description: Order sort attribute ascending or descending.
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: asc
+      - name: orderby
+        in: query
+        required: false
+        description: Sort collection by user attribute.
+        schema:
+          type: string
+          enum:
+          - id
+          - include
+          - name
+          - registered_date
+          - slug
+          - include_slugs
+          - email
+          - url
+          default: name
+      - name: page
+        in: query
+        required: false
+        description: Current page of the collection.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: per_page
+        in: query
+        required: false
+        description: Maximum number of items to be returned in result set.
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+      - name: roles
+        in: query
+        required: false
+        description: Limit result set to users matching at least one specific role provided. Accepts csv
+          list or single role.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        required: false
+        description: Limit results to those matching a string.
+        schema:
+          type: string
+      - name: search_columns
+        in: query
+        required: false
+        description: Array of column names to be searched.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - email
+            - name
+            - id
+            - username
+            - slug
+          default: []
+      - name: slug
+        in: query
+        required: false
+        description: Limit result set to users with one or more specific slugs.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: who
+        in: query
+        required: false
+        description: Limit result set to users who are considered authors.
+        schema:
+          type: string
+          enum:
+          - authors
+  /wp/v2/users/{id}:
+    get:
+      operationId: getUser
+      summary: Get an author
+      description: Retrieve a single public author record by id.
+      tags:
+      - Discovery
+      security: []
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryItem'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier for the user.
+        schema:
+          type: integer
+      - name: context
+        in: query
+        required: false
+        description: Scope under which the request is made; determines fields present in response.
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+components:
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: 'WordPress application passwords (HTTP Basic: username + application password). Advertised
+        by the site''s own API index at https://eridu.ai/wp-json/ under `authentication.application-passwords`.
+        Required only for write methods and non-public contexts; every operation in this document is anonymously
+        readable.'
+  schemas:
+    DiscoveryItem:
+      type: object
+      description: A discovery record as returned by the WordPress core REST API. Field-level schemas
+        are published by the endpoint itself via the OPTIONS method and the `context=edit` schema; they
+        are not restated here so this document never diverges from the live contract.
+      additionalProperties: true
+    Error:
+      type: object
+      description: The WordPress REST API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_post_invalid_id.
+        message:
+          type: string
+          description: Human-readable error message.
+        data:
+          type: object
+          description: Error data, carrying the HTTP status and, for validation failures, per-parameter
+            details.
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code.
+          additionalProperties: true
+      required:
+      - code
+      - message
+  responses:
+    BadRequest:
+      description: Invalid parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication is required for the requested context.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matches the supplied identifier.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

@@ -1,0 +1,24 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/eridu-content-api-openapi.yml, openapi/eridu-discovery-api-openapi.yml, openapi/eridu-media-api-openapi.yml,
+  openapi/eridu-oembed-api-openapi.yml, openapi/eridu-pages-api-openapi.yml, openapi/eridu-search-api-openapi.yml,
+  openapi/eridu-taxonomy-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: applicationPassword
+  type: http
+  scheme: basic
+  description: 'WordPress application passwords (HTTP Basic: username + application password).
+    Advertised by the site''s own API index at https://eridu.ai/wp-json/ under `authentication.application-passwords`.
+    Required only for write methods and non-public contexts; every operation in this document
+    is anonymously readable.'
+  sources:
+  - openapi/eridu-content-api-openapi.yml
+  - openapi/eridu-discovery-api-openapi.yml
+  - openapi/eridu-media-api-openapi.yml
+  - openapi/eridu-oembed-api-openapi.yml
+  - openapi/eridu-pages-api-openapi.yml
+  - openapi/eridu-search-api-openapi.yml
+  - openapi/eridu-taxonomy-api-openapi.yml
