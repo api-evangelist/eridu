@@ -18,7 +18,7 @@ url: https://raw.githubusercontent.com/api-evangelist/eridu/refs/heads/main/apis
 image: https://eridu.ai/apple-touch-icon.png
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
