@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Eridu oEmbed API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "oEmbed",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get oEmbed metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eridu.ai/wp-json/oembed/1.0/embed",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "The format query parameter, as registered by the endpoint."
+              },
+              {
+                "name": "maxwidth",
+                "value": "",
+                "type": "query",
+                "description": "The maxwidth query parameter, as registered by the endpoint."
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "The URL of the resource for which to fetch oEmbed data."
+              }
+            ]
+          },
+          "docs": "Return oEmbed 1.0 metadata for an eridu.ai URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
