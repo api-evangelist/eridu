@@ -15,6 +15,18 @@ description: >-
   WordPress core REST API behind its corporate site at eridu.ai, captured here for discovery purposes
   and anonymously readable but effectively read-only.
 url: https://raw.githubusercontent.com/api-evangelist/eridu/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://eridu.ai/apple-touch-icon.png
 x-type: company
 x-source: harvest:secondary-market
