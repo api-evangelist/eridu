@@ -53,6 +53,18 @@ tags:
 - AI Infrastructure
 - Networking
 - Semiconductors
+- Data-Center
+- Silicon
+- Network Switching
+- Interconnect
+- Hardware
+- Content
+tags_raw:
+- Company
+- Artificial Intelligence
+- AI Infrastructure
+- Networking
+- Semiconductors
 - Data Centers
 - Silicon
 - Network Switching
@@ -234,6 +246,8 @@ apis:
   humanURL: https://eridu.ai/wp-json/
   baseURL: https://eridu.ai/wp-json
   tags:
+  - oEmbed
+  tags_raw:
   - o Embed
   properties:
   - type: OpenAPI
