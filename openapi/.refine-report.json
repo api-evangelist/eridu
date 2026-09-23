@@ -1,0 +1,37 @@
+{
+  "provider": "eridu",
+  "sources": [
+    "eridu-content-api-openapi.yml",
+    "eridu-discovery-api-openapi.yml",
+    "eridu-media-api-openapi.yml",
+    "eridu-o-embed-api-openapi.yml",
+    "eridu-pages-api-openapi.yml",
+    "eridu-search-api-openapi.yml",
+    "eridu-taxonomy-api-openapi.yml"
+  ],
+  "outputs": [
+    "eridu-content-api-openapi.yml",
+    "eridu-discovery-api-openapi.yml",
+    "eridu-media-api-openapi.yml",
+    "eridu-o-embed-api-openapi.yml",
+    "eridu-pages-api-openapi.yml",
+    "eridu-search-api-openapi.yml",
+    "eridu-taxonomy-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [
+    "eridu-content-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /wp/v2/posts get, /wp/v2/posts/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "eridu-discovery-api-openapi.yml: previously refined output kept for 8 operation(s) no archived document covers (e.g. / get, /wp/v2/statuses get, /wp/v2/taxonomies get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "eridu-media-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /wp/v2/media get, /wp/v2/media/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "eridu-o-embed-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /oembed/1.0/embed get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "eridu-pages-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /wp/v2/pages get, /wp/v2/pages/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "eridu-search-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /wp/v2/search get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "eridu-taxonomy-api-openapi.yml: previously refined output kept for 4 operation(s) no archived document covers (e.g. /wp/v2/categories get, /wp/v2/categories/{id} get, /wp/v2/tags get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}
