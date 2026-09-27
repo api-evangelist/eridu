@@ -53,12 +53,11 @@ tags:
 - AI Infrastructure
 - Networking
 - Semiconductors
-- Data-Center
+- Data Center
 - Silicon
 - Network Switching
 - Interconnect
 - Hardware
-- Content
 tags_raw:
 - Company
 - Artificial Intelligence
@@ -70,207 +69,27 @@ tags_raw:
 - Network Switching
 - Interconnect
 - Hardware
-- Content
+- Data-Center
 apis:
-- aid: eridu:eridu-content-api
-  name: Eridu Content API
-  description: >-
-    Anonymous, unauthenticated read access to the Eridu news and press archive published at eridu.ai,
-    served by the WordPress core REST API. Verified live at 1 published post on 2026-08-12.
-  humanURL: https://eridu.ai/wp-json/
+- aid: eridu:eridu-ai-website-wordpress-rest
+  name: Eridu Website (WordPress REST)
+  description: 'The public WordPress REST API (wp-json) of the Eridu website at eridu.ai: the route index
+    of the site''s content management system, catalogued as one site surface rather than as separate APIs.'
   baseURL: https://eridu.ai/wp-json
   tags:
-  - Content
-  - Posts
+  - WordPress
+  x-surface: platform-generated
   properties:
-  - type: OpenAPI
-    url: openapi/eridu-content-api-openapi.yml
-  - type: Overlay
-    url: overlays/eridu-content-api-overlay.yaml
-  - type: Authentication
-    url: authentication/eridu-authentication.yml
-  - type: ErrorCatalog
-    url: errors/eridu-problem-types.yml
-  - type: Conventions
-    url: conventions/eridu-conventions.yml
-  - type: DataModel
-    url: data-model/eridu-data-model.yml
-  - type: Conformance
-    url: conformance/eridu-conformance.yml
-  - type: Lifecycle
-    url: lifecycle/eridu-lifecycle.yml
-- aid: eridu:eridu-pages-api
-  name: Eridu Pages API
-  description: >-
-    Anonymous, unauthenticated read access to the static marketing and policy pages of eridu.ai — Company,
-    Leadership, Careers, Contact, Resources, Newsletter, Terms of Use, Sales Terms and Privacy Policy.
-    Verified live at 13 published pages on 2026-08-12.
-  humanURL: https://eridu.ai/wp-json/
-  baseURL: https://eridu.ai/wp-json
-  tags:
-  - Pages
-  - Content
-  properties:
-  - type: OpenAPI
-    url: openapi/eridu-pages-api-openapi.yml
-  - type: Overlay
-    url: overlays/eridu-pages-api-overlay.yaml
-  - type: Authentication
-    url: authentication/eridu-authentication.yml
-  - type: ErrorCatalog
-    url: errors/eridu-problem-types.yml
-  - type: Conventions
-    url: conventions/eridu-conventions.yml
-  - type: DataModel
-    url: data-model/eridu-data-model.yml
-  - type: Conformance
-    url: conformance/eridu-conformance.yml
-  - type: Lifecycle
-    url: lifecycle/eridu-lifecycle.yml
-- aid: eridu:eridu-media-api
-  name: Eridu Media API
-  description: >-
-    Anonymous, unauthenticated read access to the eridu.ai media library — leadership portraits, careers
-    and team photography, investor logos and press imagery, each with its generated size variants. X-WP-Total
-    reports 115 attachments, but only 21 are retrievable anonymously — see the pagination defect recorded
-    in examples/eridu-examples.yml. Verified 2026-08-12.
-  humanURL: https://eridu.ai/wp-json/
-  baseURL: https://eridu.ai/wp-json
-  tags:
-  - Media
-  - Content
-  properties:
-  - type: OpenAPI
-    url: openapi/eridu-media-api-openapi.yml
-  - type: Overlay
-    url: overlays/eridu-media-api-overlay.yaml
-  - type: Authentication
-    url: authentication/eridu-authentication.yml
-  - type: ErrorCatalog
-    url: errors/eridu-problem-types.yml
-  - type: Conventions
-    url: conventions/eridu-conventions.yml
-  - type: DataModel
-    url: data-model/eridu-data-model.yml
-  - type: Conformance
-    url: conformance/eridu-conformance.yml
-  - type: Lifecycle
-    url: lifecycle/eridu-lifecycle.yml
-- aid: eridu:eridu-taxonomy-api
-  name: Eridu Taxonomy API
-  description: >-
-    Anonymous, unauthenticated read access to the classification vocabularies behind eridu.ai — post categories
-    and post tags as registered in the WordPress core REST API. Verified live at 1 category and 1 tag
-    on 2026-08-12; the site registers no custom taxonomies.
-  humanURL: https://eridu.ai/wp-json/
-  baseURL: https://eridu.ai/wp-json
-  tags:
-  - Taxonomy
-  - Content
-  properties:
-  - type: OpenAPI
-    url: openapi/eridu-taxonomy-api-openapi.yml
-  - type: Overlay
-    url: overlays/eridu-taxonomy-api-overlay.yaml
-  - type: Authentication
-    url: authentication/eridu-authentication.yml
-  - type: ErrorCatalog
-    url: errors/eridu-problem-types.yml
-  - type: Conventions
-    url: conventions/eridu-conventions.yml
-  - type: DataModel
-    url: data-model/eridu-data-model.yml
-  - type: Conformance
-    url: conformance/eridu-conformance.yml
-  - type: Lifecycle
-    url: lifecycle/eridu-lifecycle.yml
-- aid: eridu:eridu-search-api
-  name: Eridu Search API
-  description: >-
-    Anonymous, unauthenticated cross-content search over eridu.ai — posts and pages — returning lightweight
-    id / title / url / type / subtype records. Verified live at 14 searchable objects on 2026-08-12.
-  humanURL: https://eridu.ai/wp-json/
-  baseURL: https://eridu.ai/wp-json
-  tags:
-  - Search
-  - Content
-  properties:
-  - type: OpenAPI
-    url: openapi/eridu-search-api-openapi.yml
-  - type: Overlay
-    url: overlays/eridu-search-api-overlay.yaml
-  - type: Authentication
-    url: authentication/eridu-authentication.yml
-  - type: ErrorCatalog
-    url: errors/eridu-problem-types.yml
-  - type: Conventions
-    url: conventions/eridu-conventions.yml
-  - type: Conformance
-    url: conformance/eridu-conformance.yml
-  - type: Lifecycle
-    url: lifecycle/eridu-lifecycle.yml
-- aid: eridu:eridu-discovery-api
-  name: Eridu Discovery API
-  description: >-
-    Anonymous, unauthenticated discovery metadata for eridu.ai — the self-describing route index (167
-    routes across 7 namespaces at capture), the registered content types and taxonomies, the publication
-    statuses, and the public author records. This is the surface that makes the rest of the API machine-readable
-    in the absence of any published developer documentation.
-  humanURL: https://eridu.ai/wp-json/
-  baseURL: https://eridu.ai/wp-json
-  tags:
-  - Discovery
-  - Metadata
-  properties:
-  - type: OpenAPI
-    url: openapi/eridu-discovery-api-openapi.yml
-  - type: Overlay
-    url: overlays/eridu-discovery-api-overlay.yaml
-  - type: Authentication
-    url: authentication/eridu-authentication.yml
-  - type: ErrorCatalog
-    url: errors/eridu-problem-types.yml
-  - type: Conventions
-    url: conventions/eridu-conventions.yml
-  - type: Conformance
-    url: conformance/eridu-conformance.yml
-  - type: Lifecycle
-    url: lifecycle/eridu-lifecycle.yml
-  - type: ToolCrosswalk
-    url: mcp/eridu-tool-crosswalk.yml
-- aid: eridu:eridu-o-embed-api
-  name: Eridu o Embed API
-  description: >-
-    oEmbed 1.0 provider endpoint for eridu.ai URLs, returning embeddable rich metadata — title, author,
-    thumbnail and iframe HTML — for any published post or page.
-  humanURL: https://eridu.ai/wp-json/
-  baseURL: https://eridu.ai/wp-json
-  tags:
-  - oEmbed
-  tags_raw:
-  - o Embed
-  properties:
-  - type: OpenAPI
-    url: openapi/eridu-o-embed-api-openapi.yml
-  - type: Authentication
-    url: authentication/eridu-authentication.yml
-  - type: ErrorCatalog
-    url: errors/eridu-problem-types.yml
-  - type: Conformance
-    url: conformance/eridu-conformance.yml
+  - type: Documentation
+    url: https://eridu.ai/wp-json
+  x-platform: wordpress
+  x-platform-surface: rest
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
-- type: Overlay
-  url: overlays/eridu-oembed-api-overlay.yaml
-- type: ParentCompany
-  url: https://apis.io/providers/ciena/
-  name: Ciena
-  x-relationship: acquired
-  x-evidence: "The company was co-founded by CEO Drew Perkins, who previously co-founded Lightera Networks (acquired by Ciena) and Infinera, alongside Chief Product Officer Omar Hassen, and emerged from stealth in March 2026 with an oversubscribed Series "
 - type: Website
   url: https://eridu.ai/
 - type: About
@@ -338,3 +157,5 @@ x-enrichment:
   status: enriched
   artifacts_added: 36
   pass: local-v1
+x-tags-removed:
+- Content
