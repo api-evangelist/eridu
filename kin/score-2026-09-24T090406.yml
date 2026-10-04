@@ -1,27 +1,25 @@
-# Kin Score artifact — eridu — 2026-08-31T223420
+# Kin Score artifact — eridu — 2026-09-24T090406
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: eridu
-  schema_version: 0.17.2
-  scored_at: '2026-08-31'
-  run_ts: 2026-08-31T223420
-  composite: 19.7
+  schema_version: 0.22.0
+  scored_at: '2026-09-24'
+  run_ts: 2026-09-24T090406
+  composite: 18.4
   band: emerging
   facets:
-    discoverability: 75.9
-    contract_quality: 16.7
-    governance: 4.5
-    operational_transparency: 0.0
-    developer_ergonomics: 16.1
-    commercial_clarity: 21.1
+    discoverability: 66.7
+    contract_quality: 7.3
     contract_governance: 4.5
+    operational_transparency: 0.0
+    developer_ergonomics: 25.6
     access_clarity: 21.1
   agent_readiness:
-    score: 28.7
-    band: agent-ready
+    score: 13.8
+    band: agent-aware
     dimensions:
-      spec_presence: true
+      spec_presence: false
       agentic_access: derived
       reversibility_documented: na
       mcp_server: false
