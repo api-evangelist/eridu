@@ -64,65 +64,123 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Eridu is an AI networking infrastructure company founded in 2024 and headquartered in Saratoga,
-California. It is building a clean-sheet network switch architecture — silicon, systems and software
-together — aimed at the interconnect bottleneck that limits how efficiently GPUs exchange data inside
-large AI training clusters. Co-founded by CEO Drew Perkins (previously Lightera Networks, acquired by
-Ciena, and Infinera) with Chief Product Officer Omar Hassen, it emerged from stealth in March 2026
-with an oversubscribed Series A of more than $200M led by Socratic Partners, bringing total funding to
-approximately $230M.
+Eridu is an AI networking infrastructure company founded in 2024 and headquartered at 12900 Saratoga Ave in Saratoga, California. It is building a clean-sheet network switch architecture — silicon, systems and software together — aimed at the interconnect bottleneck that limits how efficiently GPUs exchange data inside large AI training clusters and data centers. The company was co-founded by CEO Drew Perkins, who previously co-founded Lightera Networks (acquired by Ciena) and Infinera, alongside Chief Product Officer Omar Hassen, and emerged from stealth in March 2026 with an oversubscribed Series A of more than $200M led by Socratic Partners, bringing total funding to approximately $230M with participation from John Doerr, Kleiner Perkins, Hudson River Trading, Capricorn Investment Group, Matter Venture Partners and Fusion Fund. Eridu is a semiconductor and systems company rather than a software vendor: it publishes no developer program, no developer portal, no product API, no SDKs and no pricing. The only machine-readable interface it serves is the WordPress core REST API behind its corporate site at eridu.ai, captured here for discovery purposes and anonymously readable but effectively read-only.
 
-- Website: https://eridu.ai/
-- Company: https://eridu.ai/company/ · Leadership: https://eridu.ai/company/leadership/
-- Resources: https://eridu.ai/resources/ · Careers: https://ats.rippling.com/eridu-ai/jobs
+**Areas:** Company · Artificial Intelligence · AI Infrastructure · Networking · Semiconductors · Data Center · Silicon · Network Switching · Interconnect · Hardware
 
-## What this profile found
+## Eridu on APIs.io
 
-Eridu is a semiconductor and systems company, not a software vendor. **It publishes no developer
-program** — no developer portal, no API reference, no product API, no SDKs, no pricing, no GitHub
-organization, no MCP server, no A2A agent card, no webhooks and no `/.well-known/` documents. Every
-one of those is a measured absence recorded in the artifacts below, not an unchecked gap.
+Everything profiled for Eridu is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/eridu/](https://apis.io/providers/eridu/)** — or go straight to one of the APIs or properties below.
 
-The one machine-readable interface Eridu serves is the **WordPress core REST API** behind its
-corporate site at `https://eridu.ai/wp-json` — anonymous, effectively read-only, and carrying company
-content rather than product data. It is catalogued here for discovery. The seven OpenAPI documents in
-`openapi/` are API Evangelist derivations of the provider's own live self-describing route index
-(saved verbatim to `openapi/_original/eridu-wp-json-index.json`); Eridu publishes no OpenAPI.
+### APIs (1)
 
-Two findings worth surfacing:
+- [Eridu Website (WordPress REST)](https://apis.io/apis/eridu/eridu-ai-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the Eridu website at eridu.ai: the route index of the site's content management system, catalogued as one site…
 
-- **`/wp/v2/media` reports a total it will not serve.** `X-WP-Total` says 115 attachments; an
-  anonymous caller receives at most 21, however it pages. WordPress computes the total before
-  applying the per-attachment read filter. A client that drives its paging loop from the header will
-  request permanently empty pages. Recorded in `examples/eridu-examples.yml`.
-- **The `wp-abilities/v1` namespace is registered but auth-gated.** This is the agent-facing Abilities
-  surface WordPress core is standardising on; `GET /wp-json/wp-abilities/v1/abilities` returns 401
-  anonymously, so its ability list could not be enumerated and nothing was inferred from it.
+### Published properties
 
-## Artifacts
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-| Directory | What is in it |
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [eridu](https://apis.io/servers/eridu/eridu/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Eridu Agentic Access](https://apis.io/agentic-access/eridu/eridu-agentic-access/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [Moved to /providers/eridu/](https://apis.io/collections/eridu/open-eridu-content-api/)
+- [Moved to /providers/eridu/](https://apis.io/collections/eridu/open-eridu-discovery-api/)
+- [Moved to /providers/eridu/](https://apis.io/collections/eridu/open-eridu-media-api/)
+- [Moved to /providers/eridu/](https://apis.io/collections/eridu/open-eridu-oembed-api/)
+- [Moved to /providers/eridu/](https://apis.io/collections/eridu/open-eridu-pages-api/)
+- [Moved to /providers/eridu/](https://apis.io/collections/eridu/open-eridu-search-api/)
+- [Moved to /providers/eridu/](https://apis.io/collections/eridu/open-eridu-taxonomy-api/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Eridu Authentication](https://apis.io/security/eridu/eridu-authentication/)
+- [Eridu Domain Security](https://apis.io/security/eridu/eridu-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Eridu Plans Pricing](https://apis.io/plans/eridu/eridu-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Eridu Rate Limits](https://apis.io/rate-limits/eridu/eridu-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://eridu.ai/)
+- [Blog](https://eridu.ai/resources/blog/)
+- [Terms of service](https://eridu.ai/terms-of-use/)
+- [Privacy policy](https://eridu.ai/privacy/)
+
+## API Evangelist rating
+
+**Kin Score 19.3** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| `apis.yml` | APIs.json 0.20 profile — company identity, 7 API entries, artifact pointers |
-| `openapi/` | 7 OpenAPI 3.1 documents, 20 operations, derived from the live route index |
-| `openapi/_original/` | The provider's own `/wp-json/` route index, verbatim |
-| `overlays/` | OpenAPI Overlay 1.0.0 per spec, recording API Evangelist enhancements |
-| `authentication/` | Auth profile — HTTP Basic application passwords, writes only |
-| `conventions/` | Pagination, field selection, hypermedia, tracing, versioning, caching |
-| `errors/` | The WordPress error envelope and five live-captured problem types |
-| `examples/` | 10 worked requests + 5 error cases, all captured live |
-| `data-model/` | Entity graph and relationships, derived from `_links` and the type registry |
-| `conformance/` | 19 standards assessed — what it does and does not conform to |
-| `lifecycle/` | Versioning, stability risk, and the absence of status page / deprecation policy |
-| `rate-limits/` | Measured zero — no rate-limit headers are returned |
-| `plans/` | Measured zero — no pricing of any kind is published |
-| `packages/` | Measured zero — with the two same-named third-party packages explicitly excluded |
-| `well-known/` | Probe record: every `/.well-known/` path returned 404 |
-| `security/` | TLS/DNS posture probe (no HSTS, no DNSSEC, no CAA; SPF and DMARC present) |
-| `mcp/` | Candidate tool manifest + tool crosswalk — Eridu operates no MCP server |
-| `agentic-access/` | Recommended `x-agentic-access` contracts for all 20 operations |
-| `skills/` | 4 packaged Agent Skills grounded in real operationIds |
-| `llms/` | `llms.txt` generated for this profile (Eridu serves none) |
+| Discoverability | 66.1 |
+| Contract quality | 6.5 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 25.6 |
+| Access clarity | 21.1 |
 
-Not present because the provider has no such surface: `asyncapi/`, `a2a/`, `graphql/`, `grpc/`,
-`scopes/`, `sandbox/`, `cli/`, `components/`, `changelog/`.
+**Agent readiness 11.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/eridu/](https://apis.io/providers/eridu/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Eridu: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/eridu/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
